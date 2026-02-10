@@ -1,0 +1,158 @@
+[
+    {
+        "id": "intro",
+        "level": "Basic",
+        "title": "Introduction to Grammar",
+        "description": "Fundamental concepts for Japanese sentence structure.",
+        "points": [
+            {
+                "pattern": "AはBです (A wa B desu)",
+                "meaning": "A is B",
+                "usage": "Basic sentence structure. 'wa' marks the topic.",
+                "example": "私は学生です。\n(Watashi wa gakusei desu.)\nI am a student."
+            },
+            {
+                "pattern": "AはBではありません (A wa B dewa arimasen)",
+                "meaning": "A is not B",
+                "usage": "Negative form of 'desu'.",
+                "example": "これは本ではありません。\n(Kore wa hon dewa arimasen.)\nThis is not a book."
+            },
+            {
+                "pattern": "AはBですか (A wa B desu ka)",
+                "meaning": "Is A B?",
+                "usage": "Question form. 'ka' makes it a question.",
+                "example": "あなたは日本人ですか。\n(Anata wa Nihonjin desu ka.)\nAre you Japanese?"
+            }
+        ]
+    },
+    {
+        "id": "particles",
+        "level": "N5",
+        "title": "Essential Particles",
+        "description": "Crucial markers that define word relationships.",
+        "points": [
+            {
+                "pattern": "を (o)",
+                "meaning": "Object marker",
+                "usage": "Marks the direct object of an action.",
+                "example": "水を飲みます。\n(Mizu o nomimasu.)\nI drink water."
+            },
+            {
+                "pattern": "に (ni)",
+                "meaning": "Target / Time / Location",
+                "usage": "Marks destination, specific time, or location of existence.",
+                "example": "学校に行きます。\n(Gakkou ni ikimasu.)\nI go to school."
+            },
+            {
+                "pattern": "で (de)",
+                "meaning": "Place of Action / Means",
+                "usage": "Marks where an action happens or the tool used.",
+                "example": "バスで帰ります。\n(Basu de kaerimasu.)\nI go home by bus."
+            },
+            {
+                "pattern": "と (to)",
+                "meaning": "And / With",
+                "usage": "Connects nouns or indicates accompaniment.",
+                "example": "友達と話します。\n(Tomodachi to hanashimasu.)\nI talk with a friend."
+            }
+        ]
+    },
+    {
+        "id": "verbs_te",
+        "level": "N5",
+        "title": "Verb Te-form (て形)",
+        "description": "A versatile verb form used for requests and connecting actions.",
+        "points": [
+            {
+                "pattern": "〜てください (~te kudasai)",
+                "meaning": "Please do ~",
+                "usage": "Polite request.",
+                "example": "見てください。\n(Mite kudasai.)\nPlease look."
+            },
+            {
+                "pattern": "〜ている (~te iru)",
+                "meaning": "Is doing (Progressive)",
+                "usage": "Ongoing action or state.",
+                "example": "雨が降っています。\n(Ame ga futte imasu.)\nIt is raining."
+            },
+            {
+                "pattern": "〜てもいいですか (~te mo ii desu ka)",
+                "meaning": "May I do ~?",
+                "usage": "Asking for permission.",
+                "example": "写真を撮ってもいいですか。\n(Shashin o totte mo ii desu ka.)\nMay I take a photo?"
+            },
+            {
+                "pattern": "〜てはいけません (~te wa ikemasen)",
+                "meaning": "Must not do ~",
+                "usage": "Prohibition.",
+                "example": "ここに入ってはいけません。\n(Koko ni haitte wa ikemasen.)\nYou must not enter here."
+            }
+        ]
+    },
+    {
+        "id": "verbs_nai",
+        "level": "N5",
+        "title": "Verb Nai-form (ない形)",
+        "description": "Negative verb form used in various grammar patterns.",
+        "points": [
+            {
+                "pattern": "〜ないでください (~naide kudasai)",
+                "meaning": "Please don't do ~",
+                "usage": "Polite negative request.",
+                "example": "行かないでください。\n(Ikanaide kudasai.)\nPlease don't go."
+            },
+            {
+                "pattern": "〜なければなりません (~nakereba narimasen)",
+                "meaning": "Must do ~",
+                "usage": "Obligation.",
+                "example": "勉強しなければなりません。\n(Benkyou shinakereba narimasen.)\nI must study."
+            },
+            {
+                "pattern": "〜なくてもいいです (~nakutemo ii desu)",
+                "meaning": "Don't have to do ~",
+                "usage": "Lack of obligation.",
+                "example": "明日来なくてもいいです。\n(Ashita konakutemo ii desu.)\nYou don't have to come tomorrow."
+            }
+        ]
+    },
+    {
+        "id": "verbs_ta",
+        "level": "N5",
+        "title": "Verb Ta-form (た形)",
+        "description": "Past tense form used for experience and listing actions.",
+        "points": [
+            {
+                "pattern": "〜たことがある (~ta koto ga aru)",
+                "meaning": "Have done ~ before",
+                "usage": "Past experience.",
+                "example": "日本に行ったことがあります。\n(Nihon ni itta koto ga arimasu.)\nI have been to Japan."
+            },
+            {
+                "pattern": "〜たり〜たりする (~tari ~tari suru)",
+                "meaning": "Do things like ~ and ~",
+                "usage": "Listing representative actions.",
+                "example": "本を読んだり、テレビを見たりします。\n(Hon o yondari, terebi o mitari shimasu.)\nI read books, watch TV, etc."
+            }
+        ]
+    },
+    {
+        "id": "adjectives",
+        "level": "N5",
+        "title": "Adjective Conjugations",
+        "description": "How to modify and connect adjectives.",
+        "points": [
+            {
+                "pattern": "Aい → Aくて (A-i -> A-kute)",
+                "meaning": "~ and (joining i-adjectives)",
+                "usage": "Connecting sentences with i-adjectives.",
+                "example": "この本は安くて面白いです。\n(Kono hon wa yasukute omoshiroi desu.)\nThis book is cheap and interesting."
+            },
+            {
+                "pattern": "Naだ → Naで (Na-da -> Na-de)",
+                "meaning": "~ and (joining na-adjectives)",
+                "usage": "Connecting sentences with na-adjectives.",
+                "example": "彼は親切で元気です。\n(Kare wa shinsetsu de genki desu.)\nHe is kind and energetic."
+            }
+        ]
+    }
+]

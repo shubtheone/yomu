@@ -1,0 +1,102 @@
+/* ═══════════════════════════════════════
+   GRAMMAR VIEW
+   ═══════════════════════════════════════ */
+.grammar-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 16px 100px;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.grammar-section {
+    margin-bottom: 2rem;
+}
+
+.grammar-header {
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+    border-left: 4px solid var(--accent);
+}
+
+.grammar-level {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent);
+    background: rgba(226, 114, 91, 0.15);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+.grammar-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 4px 0;
+    color: var(--text-primary);
+}
+
+.grammar-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.grammar-points {
+    display: grid;
+    gap: 16px;
+}
+
+.grammar-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 12px var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.grammar-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px var(--shadow-strong);
+    border-color: var(--border-highlight);
+}
+
+.grammar-pattern {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+.grammar-meaning {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.grammar-usage {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.grammar-example {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    border-left: 3px solid var(--text-tertiary);
+    font-family: 'Noto Serif JP', serif;
+    line-height: 1.6;
+}
+
+[data-theme="light"] .grammar-example {
+    background: rgba(0, 0, 0, 0.05);
+}

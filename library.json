@@ -1,30 +1,199 @@
 [
   {
+    "id": "kumo_no_ito",
+    "title": "蜘蛛の糸",
+    "title_en": "The Spider's Thread",
+    "author": "芥川龍之介",
+    "author_en": "Akutagawa Ryunosuke",
+    "gradient": [
+      "#e8b44a",
+      "#8B4513",
+      "#2d1a08"
+    ],
+    "summary_ja": "極楽から地獄を覗いた釈迦は、地獄に落ちた大泥棒カンダタに一筋の蜘蛛の糸を下ろす。カンダタは糸を辿り地獄を脱出しようとするが…",
+    "summary_en": "Buddha lowers a single spider's thread from Paradise to the great thief Kandata in Hell. As Kandata climbs toward salvation, his selfishness leads to his downfall.",
+    "tags": [
+      "classic",
+      "complete",
+      "short-story",
+      "moral-tale"
+    ],
+    "chapters": [
+      {
+        "id": "ch1",
+        "title": "蜘蛛の糸",
+        "title_en": "The Spider's Thread (Complete)",
+        "filename": "kumo_no_ito.json"
+      }
+    ]
+  },
+  {
     "id": "rashomon",
     "title": "羅生門",
-    "filename": "rashomon.json",
+    "title_en": "Rashomon",
+    "author": "芥川龍之介",
+    "author_en": "Akutagawa Ryunosuke",
+    "gradient": [
+      "#c0392b",
+      "#8B1A1A",
+      "#2D0A0A"
+    ],
     "summary_ja": "下人が羅生門の下で雨やみを待っていた。彼は生きるために悪を選ぶ老婆を見て、自らも悪に染まる決意をする。",
-    "summary_en": "A servant waits under the Rashomon gate. Witnessing an old woman doing evil to survive, he decides to embrace evil himself."
+    "summary_en": "A servant waits under the Rashomon gate. Witnessing an old woman doing evil to survive, he decides to embrace evil himself.",
+    "tags": [
+      "classic",
+      "complete",
+      "short-story",
+      "literary"
+    ],
+    "chapters": [
+      {
+        "id": "ch1",
+        "title": "羅生門",
+        "title_en": "Rashomon (Complete)",
+        "filename": "rashomon.json"
+      }
+    ]
+  },
+  {
+    "id": "hashire_melos",
+    "title": "走れメロス",
+    "title_en": "Run, Melos!",
+    "author": "太宰治",
+    "author_en": "Dazai Osamu",
+    "gradient": [
+      "#2980b9",
+      "#1B4F72",
+      "#0A1929"
+    ],
+    "summary_ja": "暴君ディオニスに死刑を宣告されたメロスは、友人を人質にして妹の結婚式へ向かう。約束の三日目、様々な困難を乗り越え走り続けるメロスの姿を描く。",
+    "summary_en": "Sentenced to death by the tyrant Dionysius, Melos leaves his friend as hostage and races back for his sister's wedding. A tale of trust, friendship, and perseverance.",
+    "tags": [
+      "classic",
+      "complete",
+      "short-story",
+      "friendship"
+    ],
+    "chapters": [
+      {
+        "id": "ch1",
+        "title": "走れメロス",
+        "title_en": "Run, Melos! (Complete)",
+        "filename": "hashire_melos.json"
+      }
+    ]
+  },
+  {
+    "id": "chumon",
+    "title": "注文の多い料理店",
+    "title_en": "The Restaurant of Many Orders",
+    "author": "宮沢賢治",
+    "author_en": "Miyazawa Kenji",
+    "gradient": [
+      "#27ae60",
+      "#145A32",
+      "#0A2D19"
+    ],
+    "summary_ja": "二人の紳士が山中で「山猫軒」という不思議な料理店に入る。次々と出される奇妙な「注文」に従ううちに、恐ろしい真実に気づく。",
+    "summary_en": "Two gentlemen enter a mysterious restaurant called 'Wildcat House' in the mountains. As they follow increasingly bizarre instructions, they discover a terrifying truth.",
+    "tags": [
+      "classic",
+      "complete",
+      "short-story",
+      "fantasy",
+      "horror"
+    ],
+    "chapters": [
+      {
+        "id": "ch1",
+        "title": "注文の多い料理店",
+        "title_en": "The Restaurant of Many Orders (Complete)",
+        "filename": "chumon.json"
+      }
+    ]
   },
   {
     "id": "isekai_rezero",
-    "title": "Ｒｅ：ゼロから始める異世界生活 - プロローグ　『始まりの余熱』",
-    "filename": "isekai_rezero.json",
+    "title": "Re：ゼロから始める異世界生活",
+    "title_en": "Re:Zero − Starting Life in Another World",
+    "author": "長月達尊",
+    "author_en": "Tappei Nagatsuki",
+    "gradient": [
+      "#5B86E5",
+      "#36D1DC",
+      "#1B2838"
+    ],
     "summary_ja": "コンビニ帰りに異世界へ召喚された少年、ナツキ・スバル。彼の過酷な運命がここから始まる。",
-    "summary_en": "Subaru Natsuki, a boy summoned to another world on his way back from a convenience store. His harsh fate begins here."
+    "summary_en": "Subaru Natsuki, a boy summoned to another world on his way back from a convenience store. His harsh fate begins here.",
+    "tags": [
+      "isekai",
+      "fantasy",
+      "light-novel",
+      "prologue"
+    ],
+    "chapters": [
+      {
+        "id": "prologue",
+        "title": "プロローグ　『始まりの余熱』",
+        "title_en": "Prologue: The Residual Heat of the Beginning",
+        "filename": "isekai_rezero.json"
+      }
+    ]
   },
   {
     "id": "isekai_mushoku",
-    "title": "無職転生　- 異世界行ったら本気だす - - プロローグ",
-    "filename": "isekai_mushoku.json",
+    "title": "無職転生 ～異世界行ったら本気だす～",
+    "title_en": "Mushoku Tensei: Jobless Reincarnation",
+    "author": "理不尽な孫の手",
+    "author_en": "Rifujin na Magonote",
+    "gradient": [
+      "#8E44AD",
+      "#6C3483",
+      "#1A0A28"
+    ],
     "summary_ja": "34歳無職が異世界に転生し、本気で生きることを決意する。剣と魔法の世界での新たな人生。",
-    "summary_en": "A 34-year-old unemployed man reincarnates into a fantasy world, determined to live his new life to the fullest."
+    "summary_en": "A 34-year-old unemployed man reincarnates into a fantasy world, determined to live his new life to the fullest.",
+    "tags": [
+      "isekai",
+      "fantasy",
+      "reincarnation",
+      "prologue"
+    ],
+    "chapters": [
+      {
+        "id": "prologue",
+        "title": "プロローグ",
+        "title_en": "Prologue",
+        "filename": "isekai_mushoku.json"
+      }
+    ]
   },
   {
     "id": "isekai_bookworm",
-    "title": "本好きの下剋上　～司書になるためには手段を選んでいられません～ - プロローグ",
-    "filename": "isekai_bookworm.json",
+    "title": "本好きの下剋上",
+    "title_en": "Ascendance of a Bookworm",
+    "author": "香月美夜",
+    "author_en": "Miya Kazuki",
+    "gradient": [
+      "#E74C3C",
+      "#C0392B",
+      "#280A0A"
+    ],
     "summary_ja": "本好きの女子大生が異世界の兵士の娘として転生。本がない世界で、自ら本を作る戦いが始まる。",
-    "summary_en": "A book-loving student is reborn as a soldier's daughter in a world without books. She begins her battle to create them herself."
+    "summary_en": "A book-loving student is reborn as a soldier's daughter in a world without books. She begins her battle to create them herself.",
+    "tags": [
+      "isekai",
+      "fantasy",
+      "slice-of-life",
+      "prologue"
+    ],
+    "chapters": [
+      {
+        "id": "prologue",
+        "title": "プロローグ",
+        "title_en": "Prologue",
+        "filename": "isekai_bookworm.json"
+      }
+    ]
   }
 ]

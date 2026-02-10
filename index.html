@@ -1,47 +1,368 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yomu - 読む</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Yomu - 読む | Japanese Reader</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#fdf6e3">
-    <meta name="description" content="Offline-first Japanese reader with library">
-    <link rel="apple-touch-icon" href="icon-192.png">
+    <meta name="theme-color" content="#0d0d14">
+    <meta name="description" content="Offline-first Japanese novel reader with furigana, dictionary, and flashcards">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="icon.svg">
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <div id="app">
-        <header>
-            <button id="back-btn" class="nav-btn hidden" aria-label="Back to Library">←</button>
-            <h1 id="header-title">Yomu Library</h1>
-            <button id="toggle-mode" class="nav-btn hidden" aria-label="Toggle Layout">⟲</button>
-        </header>
-        
-        <main id="library-view" class="view-container">
-            <div id="library-list">
-                <!-- Stories will be injected here -->
-                <p class="loading">Loading library...</p>
+        <!-- ===== LIBRARY VIEW ===== -->
+        <section id="library-view" class="view active-view">
+            <header class="top-bar">
+                <div class="top-bar-content">
+                    <h1 class="logo">
+                        <span class="logo-kanji">読</span>
+                        <span class="logo-text">Yomu</span>
+                    </h1>
+                    <button id="theme-toggle-btn" class="icon-btn" aria-label="Toggle Theme" title="Toggle Theme">
+                        <svg class="icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="5" />
+                            <path
+                                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                        </svg>
+                        <svg class="icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                        </svg>
+                    </button>
+                </div>
+            </header>
+            <div class="library-content">
+                <div class="section-label">
+                    <span class="section-icon">📚</span>
+                    <span>My Library</span>
+                    <span class="novel-count" id="novel-count"></span>
+                </div>
+                <div id="library-grid" class="library-grid">
+                    <div class="loading-skeleton">
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                    </div>
+                </div>
             </div>
-        </main>
+        </section>
 
-        <main id="reader-view" class="view-container hidden vertical-text">
-            <div id="reader-content">
-                <!-- Story content will be injected here -->
+        <!-- ===== NOVEL DETAIL VIEW ===== -->
+        <section id="novel-view" class="view">
+            <header class="top-bar">
+                <div class="top-bar-content">
+                    <button id="novel-back-btn" class="icon-btn" aria-label="Back">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M19 12H5M12 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <h2 class="top-bar-title" id="novel-header-title"></h2>
+                    <div style="width:40px"></div>
+                </div>
+            </header>
+            <div class="novel-detail-content">
+                <div class="novel-hero" id="novel-hero">
+                    <div class="novel-cover" id="novel-cover">
+                        <span class="cover-char" id="cover-char"></span>
+                    </div>
+                    <div class="novel-meta">
+                        <h2 class="novel-title" id="novel-title"></h2>
+                        <p class="novel-author" id="novel-author"></p>
+                        <div class="novel-tags" id="novel-tags"></div>
+                    </div>
+                </div>
+                <div class="novel-synopsis">
+                    <p class="synopsis-ja" id="novel-synopsis-ja"></p>
+                    <p class="synopsis-en" id="novel-synopsis-en"></p>
+                </div>
+                <div class="novel-progress-section" id="novel-progress-section" style="display:none">
+                    <button class="continue-btn" id="continue-reading-btn">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="5 3 19 12 5 21 5 3" />
+                        </svg>
+                        <span>Continue Reading</span>
+                    </button>
+                </div>
+                <div class="chapter-section">
+                    <div class="section-label">
+                        <span class="section-icon">📖</span>
+                        <span>Chapters</span>
+                        <span class="chapter-count" id="chapter-count"></span>
+                    </div>
+                    <div class="chapter-list" id="chapter-list"></div>
+                </div>
             </div>
-        </main>
-        
-        <!-- Definition Popup -->
-        <div id="definition-popup" class="hidden">
-            <div class="popup-content">
-                <h3 id="popup-word"></h3>
-                <p id="popup-reading"></p>
-                <hr>
-                <p id="popup-meaning">Meaning...</p>
-                <button id="close-popup">Close</button>
+        </section>
+
+        <!-- ===== READER VIEW ===== -->
+        <section id="reader-view" class="view">
+            <header class="reader-top-bar" id="reader-toolbar">
+                <div class="top-bar-content">
+                    <button id="reader-back-btn" class="icon-btn" aria-label="Back">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M19 12H5M12 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <h2 class="top-bar-title reader-title" id="reader-header-title"></h2>
+                    <div class="reader-controls">
+                        <button id="reader-settings-btn" class="icon-btn" aria-label="Reader Settings">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3" />
+                                <path
+                                    d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </header>
+            <div id="reader-content-wrapper" class="reader-content-wrapper vertical-mode">
+                <div id="reader-content" class="reader-content"></div>
+            </div>
+            <!-- Reader Settings Panel -->
+            <div id="reader-settings-panel" class="reader-settings-panel hidden">
+                <div class="settings-panel-header">
+                    <span>Reader Settings</span>
+                    <button id="close-reader-settings" class="icon-btn">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M18 6L6 18M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="settings-group">
+                    <label>Font Size</label>
+                    <div class="font-size-control">
+                        <button id="font-decrease" class="size-btn">A-</button>
+                        <span id="font-size-display">18px</span>
+                        <button id="font-increase" class="size-btn">A+</button>
+                    </div>
+                </div>
+                <div class="settings-group">
+                    <label>Reading Mode</label>
+                    <div class="mode-toggle">
+                        <button id="mode-vertical" class="mode-btn active" data-mode="vertical">縦 Vertical</button>
+                        <button id="mode-horizontal" class="mode-btn" data-mode="horizontal">横 Horizontal</button>
+                    </div>
+                </div>
+                <div class="settings-group">
+                    <label>Furigana</label>
+                    <div class="mode-toggle">
+                        <button id="furigana-on" class="mode-btn active" data-furigana="on">Show</button>
+                        <button id="furigana-off" class="mode-btn" data-furigana="off">Hide</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FLASHCARDS VIEW ===== -->
+        <section id="flashcards-view" class="view">
+            <header class="top-bar">
+                <div class="top-bar-content">
+                    <h1 class="top-bar-title-main">
+                        <span class="section-icon">📝</span> Flashcards
+                    </h1>
+                    <div style="width:40px"></div>
+                </div>
+            </header>
+            <div class="flashcards-content">
+                <div class="flashcard-stats" id="flashcard-stats">
+                    <div class="stat-card">
+                        <span class="stat-number" id="stat-total">0</span>
+                        <span class="stat-label">Total</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="stat-due">0</span>
+                        <span class="stat-label">Due</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="stat-mastered">0</span>
+                        <span class="stat-label">Mastered</span>
+                    </div>
+                </div>
+                <div id="flashcard-area" class="flashcard-area">
+                    <div id="flashcard-empty" class="flashcard-empty">
+                        <div class="empty-icon">🎴</div>
+                        <p class="empty-title">No flashcards yet</p>
+                        <p class="empty-subtitle">Tap any word while reading to add it to your flashcards</p>
+                    </div>
+                    <div id="flashcard-deck" class="flashcard-deck hidden">
+                        <div id="flashcard-card" class="flashcard-card">
+                            <div class="card-front" id="card-front">
+                                <span class="card-word" id="card-word"></span>
+                                <span class="card-hint">Tap to flip</span>
+                            </div>
+                            <div class="card-back hidden" id="card-back">
+                                <span class="card-reading" id="card-reading"></span>
+                                <hr>
+                                <span class="card-meaning" id="card-meaning"></span>
+                            </div>
+                        </div>
+                        <div class="card-actions" id="card-actions" style="display:none">
+                            <button class="review-btn again" data-rating="1">Again</button>
+                            <button class="review-btn hard" data-rating="2">Hard</button>
+                            <button class="review-btn good" data-rating="3">Good</button>
+                            <button class="review-btn easy" data-rating="4">Easy</button>
+                        </div>
+                        <div class="deck-progress" id="deck-progress"></div>
+                    </div>
+                    <div id="flashcard-list-section" class="flashcard-list-section">
+                        <div class="section-label" style="margin-top:1rem">
+                            <span>All Cards</span>
+                        </div>
+                        <div id="flashcard-list" class="flashcard-list"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== GRAMMAR VIEW ===== -->
+        <section id="grammar-view" class="view">
+            <header class="top-bar">
+                <div class="top-bar-content">
+                    <h1 class="top-bar-title-main">
+                        <span class="section-icon">🧠</span> Grammar
+                    </h1>
+                    <div style="width:40px"></div>
+                </div>
+            </header>
+            <div class="grammar-content" id="grammar-content">
+                <div class="loading-skeleton">
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SETTINGS VIEW ===== -->
+        <section id="settings-view" class="view">
+            <header class="top-bar">
+                <div class="top-bar-content">
+                    <h1 class="top-bar-title-main">
+                        <span class="section-icon">⚙️</span> Settings
+                    </h1>
+                    <div style="width:40px"></div>
+                </div>
+            </header>
+            <div class="settings-content">
+                <div class="settings-card">
+                    <h3>Appearance</h3>
+                    <div class="setting-row">
+                        <span>Theme</span>
+                        <div class="theme-selector">
+                            <button class="theme-option" data-theme="dark" id="theme-dark">
+                                <span class="theme-preview dark-preview"></span>
+                                <span>Dark</span>
+                            </button>
+                            <button class="theme-option" data-theme="light" id="theme-light">
+                                <span class="theme-preview light-preview"></span>
+                                <span>Light</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-card">
+                    <h3>Data</h3>
+                    <div class="setting-row">
+                        <span>Flashcards</span>
+                        <button class="danger-btn" id="clear-flashcards-btn">Clear All</button>
+                    </div>
+                    <div class="setting-row">
+                        <span>Reading Progress</span>
+                        <button class="danger-btn" id="clear-progress-btn">Reset</button>
+                    </div>
+                    <div class="setting-row">
+                        <span>Cache</span>
+                        <button class="secondary-btn" id="refresh-cache-btn">Refresh</button>
+                    </div>
+                </div>
+                <div class="settings-card about-card">
+                    <h3>About</h3>
+                    <div class="about-content">
+                        <div class="about-logo">読</div>
+                        <p class="about-name">Yomu <span class="version">v2.0</span></p>
+                        <p class="about-desc">Offline-first Japanese reader with furigana, dictionary & flashcards.</p>
+                        <p class="about-credit">Made with ❤️ for Japanese learners</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== DEFINITION POPUP (Bottom Sheet) ===== -->
+        <div id="definition-popup" class="definition-popup hidden">
+            <div class="popup-backdrop" id="popup-backdrop"></div>
+            <div class="popup-sheet">
+                <div class="popup-handle"></div>
+                <div class="popup-header">
+                    <h3 id="popup-word" class="popup-word"></h3>
+                    <p id="popup-reading" class="popup-reading"></p>
+                </div>
+                <div class="popup-body">
+                    <p id="popup-meaning" class="popup-meaning"></p>
+                </div>
+                <div class="popup-actions">
+                    <button id="add-flashcard-btn" class="popup-action-btn">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <path d="M12 8v8M8 12h8" />
+                        </svg>
+                        <span id="flashcard-btn-text">Add to Flashcards</span>
+                    </button>
+                    <button id="close-popup-btn" class="popup-close-btn">Close</button>
+                </div>
             </div>
         </div>
+
+        <!-- ===== BOTTOM NAVIGATION ===== -->
+        <nav id="bottom-nav" class="bottom-nav">
+            <button class="nav-item active" data-view="library" id="nav-library">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+                </svg>
+                <span>Library</span>
+            </button>
+            <button class="nav-item" data-view="flashcards" id="nav-flashcards">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="M12 8v8M8 12h8" />
+                </svg>
+                <span>Cards</span>
+            </button>
+            <button class="nav-item" data-view="grammar" id="nav-grammar">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" />
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                    <path d="M12 17h.01" />
+                </svg>
+                <span>Grammar</span>
+            </button>
+            <button class="nav-item" data-view="settings" id="nav-settings">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3" />
+                    <path
+                        d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
+                </svg>
+                <span>Settings</span>
+            </button>
+        </nav>
+
+        <!-- Toast notifications -->
+        <div id="toast-container" class="toast-container"></div>
     </div>
+
     <script src="app.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
@@ -51,4 +372,5 @@
         }
     </script>
 </body>
+
 </html>
