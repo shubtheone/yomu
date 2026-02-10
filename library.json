@@ -1,0 +1,30 @@
+[
+  {
+    "id": "rashomon",
+    "title": "羅生門",
+    "filename": "rashomon.json",
+    "summary_ja": "下人が羅生門の下で雨やみを待っていた。彼は生きるために悪を選ぶ老婆を見て、自らも悪に染まる決意をする。",
+    "summary_en": "A servant waits under the Rashomon gate. Witnessing an old woman doing evil to survive, he decides to embrace evil himself."
+  },
+  {
+    "id": "isekai_rezero",
+    "title": "Ｒｅ：ゼロから始める異世界生活 - プロローグ　『始まりの余熱』",
+    "filename": "isekai_rezero.json",
+    "summary_ja": "コンビニ帰りに異世界へ召喚された少年、ナツキ・スバル。彼の過酷な運命がここから始まる。",
+    "summary_en": "Subaru Natsuki, a boy summoned to another world on his way back from a convenience store. His harsh fate begins here."
+  },
+  {
+    "id": "isekai_mushoku",
+    "title": "無職転生　- 異世界行ったら本気だす - - プロローグ",
+    "filename": "isekai_mushoku.json",
+    "summary_ja": "34歳無職が異世界に転生し、本気で生きることを決意する。剣と魔法の世界での新たな人生。",
+    "summary_en": "A 34-year-old unemployed man reincarnates into a fantasy world, determined to live his new life to the fullest."
+  },
+  {
+    "id": "isekai_bookworm",
+    "title": "本好きの下剋上　～司書になるためには手段を選んでいられません～ - プロローグ",
+    "filename": "isekai_bookworm.json",
+    "summary_ja": "本好きの女子大生が異世界の兵士の娘として転生。本がない世界で、自ら本を作る戦いが始まる。",
+    "summary_en": "A book-loving student is reborn as a soldier's daughter in a world without books. She begins her battle to create them herself."
+  }
+]
