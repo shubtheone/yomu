@@ -1,7 +1,8 @@
 {
     "name": "Yomu - Offline Japanese Reader",
     "short_name": "Yomu",
-    "start_url": ".",
+    "start_url": "/",
+    "scope": "/",
     "display": "standalone",
     "background_color": "#0d0d14",
     "theme_color": "#0d0d14",
