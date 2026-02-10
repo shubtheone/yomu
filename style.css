@@ -415,8 +415,18 @@ body {
     line-height: 1.3;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+
+.novel-card-subtitle {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 2px 0 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .novel-card-author {
@@ -1607,7 +1617,9 @@ rt {
         border-left: 1px solid var(--border-light);
         border-right: 1px solid var(--border-light);
     }
-}/* ═══════════════════════════════════════
+}
+
+/* ═══════════════════════════════════════
    GRAMMAR VIEW
    ═══════════════════════════════════════ */
 .grammar-content {

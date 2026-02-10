@@ -1,0 +1,7 @@
+node_modules/
+.DS_Store
+*.log
+kanjiapi_full.json
+yomu-dist/
+__pycache__/
+*.zip

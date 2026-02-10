@@ -151,6 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${typeBadge}
                 <div class="novel-card-info">
                     <div class="novel-card-title">${novel.title}</div>
+                    <div class="novel-card-subtitle">${novel.title_en || ''}</div>
                     <div class="novel-card-author">${novel.author_en || novel.author}</div>
                     <div class="novel-card-chapters">${novel.chapters.length} chapter${novel.chapters.length > 1 ? 's' : ''}</div>
                 </div>
