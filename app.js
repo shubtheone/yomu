@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showFurigana: loadFromStorage('yomu-furigana', true),
         reviewQueue: [],
         reviewIndex: 0,
+        customDictionary: loadFromStorage('yomu-custom-dict', {}),
     };
 
     // ─── DOM References ───
@@ -144,9 +145,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const typeBadge = isComplete ? '<span class="type-badge complete">Complete</span>'
                 : isPrologue ? '<span class="type-badge prologue">Prologue</span>' : '';
 
+            // Cover image or gradient fallback
+            const hasCover = !!novel.cover_image;
+            const coverBg = hasCover
+                ? `<div class="novel-card-bg" style="background: ${gradientCSS}"><img class="novel-card-cover-img" src="${novel.cover_image}" alt="${novel.title}" onerror="this.style.display='none'"></div>`
+                : `<div class="novel-card-bg" style="background: ${gradientCSS}"></div>`;
+
             card.innerHTML = `
-                <div class="novel-card-bg" style="background: ${gradientCSS}"></div>
-                <span class="novel-card-char">${firstChar}</span>
+                ${coverBg}
+                ${hasCover ? '' : `<span class="novel-card-char">${firstChar}</span>`}
                 ${progress ? '<span class="progress-badge">Reading</span>' : ''}
                 ${typeBadge}
                 <div class="novel-card-info">
@@ -180,7 +187,28 @@ document.addEventListener('DOMContentLoaded', () => {
         // Cover
         const cover = document.getElementById('novel-cover');
         cover.style.background = gradientCSS;
-        document.getElementById('cover-char').textContent = firstChar;
+
+        // Cover image or kanji fallback
+        const coverChar = document.getElementById('cover-char');
+        const existingImg = cover.querySelector('.cover-img');
+        if (existingImg) existingImg.remove();
+
+        if (novel.cover_image) {
+            coverChar.style.display = 'none';
+            const img = document.createElement('img');
+            img.className = 'cover-img';
+            img.src = novel.cover_image;
+            img.alt = novel.title;
+            img.onerror = () => {
+                img.remove();
+                coverChar.style.display = '';
+                coverChar.textContent = firstChar;
+            };
+            cover.appendChild(img);
+        } else {
+            coverChar.style.display = '';
+            coverChar.textContent = firstChar;
+        }
 
         // Meta
         document.getElementById('novel-title').textContent = novel.title;
@@ -280,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
         readerContent.innerHTML = '';
         const fragment = document.createDocumentFragment();
 
-        content.forEach(lineTokens => {
+        content.forEach((lineTokens, index) => {
             const p = document.createElement('p');
 
             lineTokens.forEach(token => {
@@ -308,10 +336,170 @@ document.addEventListener('DOMContentLoaded', () => {
                 p.appendChild(span);
             });
 
+            // Add Translate Button
+            const text = lineTokens.map(t => t.s).join('').trim();
+            if (text.length > 0) {
+                const translateBtn = document.createElement('button');
+                translateBtn.className = 'translate-btn';
+                translateBtn.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l6 6M4 14h6M2 5h12M7 2v3M22 22l-5-10-5 10M14 18h6"/></svg>`;
+                translateBtn.title = 'Translate paragraph';
+                translateBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    toggleTranslation(p, text, index);
+                };
+                p.appendChild(translateBtn);
+            }
+
             fragment.appendChild(p);
         });
 
         readerContent.appendChild(fragment);
+    }
+
+    function toggleTranslation(paragraphEl, text, index) {
+        // vertical mode handling: the box should be inserted differently?
+        // In vertical mode, 'after' means to the left visually (next sibling in DOM).
+
+        // precise check for existing box
+        let next = paragraphEl.nextElementSibling;
+        if (next && next.classList.contains('translation-box')) {
+            next.remove();
+            return;
+        }
+
+        const box = document.createElement('div');
+        box.className = 'translation-box';
+
+        // cache key: unique per chapter line
+        const cacheKey = `yomu-trans-${state.currentNovel.id}-${state.currentChapter.id}-${index}`;
+        const cached = localStorage.getItem(cacheKey);
+
+        if (cached) {
+            box.textContent = cached;
+            box.classList.add('cached'); // Optional styling
+            paragraphEl.after(box);
+            return;
+        }
+
+        box.textContent = 'Translating...';
+        paragraphEl.after(box);
+
+        fetch('/api/translate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: text })
+        })
+            .then(res => {
+                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+                return res.json();
+            })
+            .then(data => {
+                box.textContent = data.translation;
+                // Save to cache
+                try {
+                    localStorage.setItem(cacheKey, data.translation);
+                } catch (e) {
+                    console.warn('Quota exceeded for localStorage translation cache');
+                }
+            })
+            .catch(err => {
+                console.error('Translation error:', err);
+                box.textContent = 'Translation unavailable (Offline). Connect to internet to fetch new translations.';
+                box.classList.add('error');
+            });
+    }
+
+    async function downloadChapterTranslations() {
+        if (!state.currentNovel || !state.currentChapter) return;
+
+        if (!confirm('Download translations for this chapter?')) return;
+
+        const btn = document.getElementById('download-translations-btn');
+        if (btn) btn.classList.add('pulse');
+
+        try {
+            showToast('Starting download...', 'info');
+
+            // Re-fetch content
+            const response = await fetch(state.currentChapter.filename);
+            const data = await response.json();
+            const content = data.content;
+
+            // Identify needed translations
+            const itemsToFetch = [];
+            content.forEach((lineTokens, index) => {
+                const text = lineTokens.map(t => t.s).join('').trim();
+                // Filter out empty lines
+                if (text.length === 0) return;
+
+                const cacheKey = `yomu-trans-${state.currentNovel.id}-${state.currentChapter.id}-${index}`;
+                if (!localStorage.getItem(cacheKey)) {
+                    itemsToFetch.push({ index, text, cacheKey });
+                }
+            });
+
+            const total = itemsToFetch.length;
+            if (total === 0) {
+                showToast('All paragraphs already downloaded!', 'success');
+                if (btn) btn.classList.remove('pulse');
+                return;
+            }
+
+            // Process in batches
+            const batchSize = 10;
+            let completed = 0;
+
+            for (let i = 0; i < total; i += batchSize) {
+                const batch = itemsToFetch.slice(i, i + batchSize);
+
+                // Update progress
+                showToast(`Downloading: ${Math.min(i, total)} / ${total}`, 'info');
+
+                await Promise.all(batch.map(async (item) => {
+                    try {
+                        const res = await fetch('/api/translate', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ text: item.text })
+                        });
+                        const resData = await res.json();
+                        if (resData.translation) {
+                            localStorage.setItem(item.cacheKey, resData.translation);
+                        }
+                    } catch (err) {
+                        console.error('Download error line ' + item.index, err);
+                    }
+                }));
+
+                completed += batch.length;
+                // Tiny delay between batches to avoid overwhelming the server/API
+                await new Promise(r => setTimeout(r, 100));
+            }
+
+            showToast(`Download complete! (${completed} new translations)`, 'success');
+
+            // Visual feedback on button
+            if (btn) {
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`;
+                btn.classList.add('success');
+                btn.style.color = '#2ecc71';
+                btn.style.borderColor = '#2ecc71';
+
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.classList.remove('success');
+                    btn.style.color = '';
+                    btn.style.borderColor = '';
+                }, 3000);
+            }
+
+        } catch (e) {
+            console.error(e);
+            showToast('Download failed', 'error');
+        } finally {
+            if (btn) btn.classList.remove('pulse');
+        }
     }
 
     function applyReaderSettings() {
@@ -382,27 +570,55 @@ document.addEventListener('DOMContentLoaded', () => {
         wordEl.textContent = token.s;
         readingEl.textContent = token.r || '';
 
-        const meaning = state.dictionary[token.s];
-        if (meaning) {
-            meaningEl.textContent = meaning;
-        } else {
-            meaningEl.textContent = `Definition not available for "${token.s}". Try searching online.`;
-        }
+        // Check dictionary and custom dictionary
+        let meaning = state.dictionary[token.s] || state.customDictionary[token.s];
 
-        // Check if already in flashcards
-        const isInFlashcards = state.flashcards.some(fc => fc.word === token.s);
-        if (isInFlashcards) {
-            flashcardBtn.classList.add('added');
-            flashcardBtnText.textContent = '✓ In Flashcards';
-        } else {
-            flashcardBtn.classList.remove('added');
-            flashcardBtnText.textContent = 'Add to Flashcards';
-        }
+        const setMeaning = (m) => {
+            meaningEl.textContent = m;
+            flashcardBtn.dataset.meaning = m || '';
 
-        // Store current token for flashcard action
+            // Check flashcards
+            const isInFlashcards = state.flashcards.some(fc => fc.word === token.s);
+            if (isInFlashcards) {
+                flashcardBtn.classList.add('added');
+                flashcardBtnText.textContent = '✓ In Flashcards';
+            } else {
+                flashcardBtn.classList.remove('added');
+                flashcardBtnText.textContent = 'Add to Flashcards';
+            }
+        };
+
         flashcardBtn.dataset.word = token.s;
         flashcardBtn.dataset.reading = token.r || '';
-        flashcardBtn.dataset.meaning = meaning || '';
+
+        if (meaning) {
+            setMeaning(meaning);
+        } else {
+            // Not found -> Fetch translation
+            meaningEl.textContent = 'Fetching translation...';
+            // Disable button temporarily? No, user might want to add anyway.
+
+            fetch('/api/translate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: token.s })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    const trans = data.translation;
+                    // Save to custom dictionary
+                    state.customDictionary[token.s] = trans;
+                    saveToStorage('yomu-custom-dict', state.customDictionary);
+
+                    // Update UI
+                    setMeaning(trans);
+                })
+                .catch(err => {
+                    console.warn(err);
+                    meaningEl.textContent = `Definition not available for "${token.s}". Try searching online.`;
+                    setMeaning('');
+                });
+        }
 
         popup.classList.remove('hidden');
     }
@@ -619,6 +835,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function setupEventListeners() {
         // Theme Toggle
         document.getElementById('theme-toggle-btn').addEventListener('click', toggleTheme);
+
+        // Download Translations
+        const dlBtn = document.getElementById('download-translations-btn');
+        if (dlBtn) {
+            dlBtn.addEventListener('click', downloadChapterTranslations);
+        }
 
         // Bottom Nav
         document.querySelectorAll('.nav-item').forEach(item => {

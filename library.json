@@ -5,6 +5,7 @@
     "title_en": "The Spider's Thread",
     "author": "芥川龍之介",
     "author_en": "Akutagawa Ryunosuke",
+    "cover_image": "covers/kumo_no_ito.jpg",
     "gradient": [
       "#e8b44a",
       "#8B4513",
@@ -33,6 +34,7 @@
     "title_en": "Rashomon",
     "author": "芥川龍之介",
     "author_en": "Akutagawa Ryunosuke",
+    "cover_image": "covers/rashomon.jpg",
     "gradient": [
       "#c0392b",
       "#8B1A1A",
@@ -61,6 +63,7 @@
     "title_en": "Run, Melos!",
     "author": "太宰治",
     "author_en": "Dazai Osamu",
+    "cover_image": "covers/hashire_melos.jpg",
     "gradient": [
       "#2980b9",
       "#1B4F72",
@@ -89,6 +92,7 @@
     "title_en": "The Restaurant of Many Orders",
     "author": "宮沢賢治",
     "author_en": "Miyazawa Kenji",
+    "cover_image": "covers/chumon.jpg",
     "gradient": [
       "#27ae60",
       "#145A32",
@@ -109,90 +113,6 @@
         "title": "注文の多い料理店",
         "title_en": "The Restaurant of Many Orders (Complete)",
         "filename": "chumon.json"
-      }
-    ]
-  },
-  {
-    "id": "isekai_rezero",
-    "title": "Re：ゼロから始める異世界生活",
-    "title_en": "Re:Zero − Starting Life in Another World",
-    "author": "長月達尊",
-    "author_en": "Tappei Nagatsuki",
-    "gradient": [
-      "#5B86E5",
-      "#36D1DC",
-      "#1B2838"
-    ],
-    "summary_ja": "コンビニ帰りに異世界へ召喚された少年、ナツキ・スバル。彼の過酷な運命がここから始まる。",
-    "summary_en": "Subaru Natsuki, a boy summoned to another world on his way back from a convenience store. His harsh fate begins here.",
-    "tags": [
-      "isekai",
-      "fantasy",
-      "light-novel",
-      "prologue"
-    ],
-    "chapters": [
-      {
-        "id": "prologue",
-        "title": "プロローグ　『始まりの余熱』",
-        "title_en": "Prologue: The Residual Heat of the Beginning",
-        "filename": "isekai_rezero.json"
-      }
-    ]
-  },
-  {
-    "id": "isekai_mushoku",
-    "title": "無職転生 ～異世界行ったら本気だす～",
-    "title_en": "Mushoku Tensei: Jobless Reincarnation",
-    "author": "理不尽な孫の手",
-    "author_en": "Rifujin na Magonote",
-    "gradient": [
-      "#8E44AD",
-      "#6C3483",
-      "#1A0A28"
-    ],
-    "summary_ja": "34歳無職が異世界に転生し、本気で生きることを決意する。剣と魔法の世界での新たな人生。",
-    "summary_en": "A 34-year-old unemployed man reincarnates into a fantasy world, determined to live his new life to the fullest.",
-    "tags": [
-      "isekai",
-      "fantasy",
-      "reincarnation",
-      "prologue"
-    ],
-    "chapters": [
-      {
-        "id": "prologue",
-        "title": "プロローグ",
-        "title_en": "Prologue",
-        "filename": "isekai_mushoku.json"
-      }
-    ]
-  },
-  {
-    "id": "isekai_bookworm",
-    "title": "本好きの下剋上",
-    "title_en": "Ascendance of a Bookworm",
-    "author": "香月美夜",
-    "author_en": "Miya Kazuki",
-    "gradient": [
-      "#E74C3C",
-      "#C0392B",
-      "#280A0A"
-    ],
-    "summary_ja": "本好きの女子大生が異世界の兵士の娘として転生。本がない世界で、自ら本を作る戦いが始まる。",
-    "summary_en": "A book-loving student is reborn as a soldier's daughter in a world without books. She begins her battle to create them herself.",
-    "tags": [
-      "isekai",
-      "fantasy",
-      "slice-of-life",
-      "prologue"
-    ],
-    "chapters": [
-      {
-        "id": "prologue",
-        "title": "プロローグ",
-        "title_en": "Prologue",
-        "filename": "isekai_bookworm.json"
       }
     ]
   }

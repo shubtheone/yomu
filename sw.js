@@ -1,4 +1,4 @@
-const CACHE_NAME = 'yomu-cache-v8';
+const CACHE_NAME = 'yomu-cache-v10';
 const URLS_TO_CACHE = [
     './',
     './index.html',
