@@ -356,6 +356,36 @@ document.addEventListener('DOMContentLoaded', () => {
         readerContent.appendChild(fragment);
     }
 
+    async function translateText(text) {
+        // Use MyMemory Translation API (free, no auth required)
+        // Note: Free tier has 5000 character limit per request and ~100 requests/day limit
+        
+        // Split text if too long (max 4500 chars to be safe)
+        if (text.length > 4500) {
+            console.warn('Text too long for single translation request, truncating to 4500 characters');
+            text = text.substring(0, 4500);
+        }
+        
+        const encodedText = encodeURIComponent(text);
+        const url = `https://api.mymemory.translated.net/get?q=${encodedText}&langpair=ja|en`;
+        
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const data = await response.json();
+            
+            // Check for valid translation response
+            if (data.responseData && data.responseData.translatedText) {
+                return data.responseData.translatedText;
+            } else {
+                throw new Error('Translation failed: ' + (data.responseDetails || 'Invalid response'));
+            }
+        } catch (error) {
+            console.error('Translation API error:', error);
+            throw error;
+        }
+    }
+
     function toggleTranslation(paragraphEl, text, index) {
         // vertical mode handling: the box should be inserted differently?
         // In vertical mode, 'after' means to the left visually (next sibling in DOM).
@@ -384,27 +414,19 @@ document.addEventListener('DOMContentLoaded', () => {
         box.textContent = 'Translating...';
         paragraphEl.after(box);
 
-        fetch('/api/translate', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text: text })
-        })
-            .then(res => {
-                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-                return res.json();
-            })
-            .then(data => {
-                box.textContent = data.translation;
+        translateText(text)
+            .then(translation => {
+                box.textContent = translation;
                 // Save to cache
                 try {
-                    localStorage.setItem(cacheKey, data.translation);
+                    localStorage.setItem(cacheKey, translation);
                 } catch (e) {
                     console.warn('Quota exceeded for localStorage translation cache');
                 }
             })
             .catch(err => {
                 console.error('Translation error:', err);
-                box.textContent = 'Translation unavailable (Offline). Connect to internet to fetch new translations.';
+                box.textContent = 'Translation unavailable. Please check your internet connection and try again.';
                 box.classList.add('error');
             });
     }
@@ -445,26 +467,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Process in batches
-            const batchSize = 10;
+            // Process in batches with delay to respect API rate limits
+            // Note: MyMemory free tier allows ~100 requests/day from an IP
+            const batchSize = 5;
             let completed = 0;
 
             for (let i = 0; i < total; i += batchSize) {
                 const batch = itemsToFetch.slice(i, i + batchSize);
 
-                // Update progress
-                showToast(`Downloading: ${Math.min(i, total)} / ${total}`, 'info');
+                // Update progress with correct count
+                showToast(`Downloading: ${completed} / ${total}`, 'info');
 
                 await Promise.all(batch.map(async (item) => {
                     try {
-                        const res = await fetch('/api/translate', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ text: item.text })
-                        });
-                        const resData = await res.json();
-                        if (resData.translation) {
-                            localStorage.setItem(item.cacheKey, resData.translation);
+                        const translation = await translateText(item.text);
+                        if (translation) {
+                            localStorage.setItem(item.cacheKey, translation);
                         }
                     } catch (err) {
                         console.error('Download error line ' + item.index, err);
@@ -472,8 +490,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }));
 
                 completed += batch.length;
-                // Tiny delay between batches to avoid overwhelming the server/API
-                await new Promise(r => setTimeout(r, 100));
+                // Delay between batches to avoid overwhelming the API
+                if (i + batchSize < total) {
+                    await new Promise(r => setTimeout(r, 1000)); // 1 second delay
+                }
             }
 
             showToast(`Download complete! (${completed} new translations)`, 'success');

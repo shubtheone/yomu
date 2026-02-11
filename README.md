@@ -9,28 +9,41 @@ An offline-first Japanese reading web app with furigana, built-in dictionary, fl
 - 📚 **Built-in dictionary** — tap any word for its definition
 - 🃏 **Flashcard system** with SRS (spaced repetition) for vocabulary review
 - 📝 **Grammar reference** — common Japanese grammar patterns
-- 🌐 **Instant Translation** — translate any paragraph with a single click
+- 🌐 **Instant Translation** — translate any paragraph with a single click (uses MyMemory Translation API)
 - 🌙 **Dark / Light themes** — proper Japanese typography (Yu Mincho)
 - 📱 **PWA** — installable, works offline after first load
 
 ## Quick Start
 
-### 1. Install dependencies
+### Running as a Static Site (Recommended for Deployment)
+
+The app now works as a fully static site with client-side translation using the MyMemory Translation API. No server setup required!
+
+Simply serve the files with any static hosting service (Vercel, Netlify, GitHub Pages, etc.) or use a simple HTTP server:
 
 ```bash
-pip install deep-translator
-```
+# Using Python's built-in HTTP server
+python3 -m http.server 8000
 
-### 2. Run the app
-
-```bash
-# Start the server (handles translation API)
-python3 server.py
+# Or using Node.js http-server
+npx http-server -p 8000
 ```
 
 Open **http://localhost:8000** in your browser.
 
-### 3. Add stories with the fetcher
+### Running with Python Server (Legacy)
+
+If you want to use the Python server with `deep-translator` library:
+
+```bash
+# Install dependencies
+pip install deep-translator
+
+# Start the server
+python3 server.py
+```
+
+### Add stories with the fetcher
 
 The `fetch_story.py` script fetches Japanese stories from [Aozora Bunko](https://www.aozora.gr.jp/) (public domain classics), tokenizes them with [Janome](https://github.com/mocobeta/janome) for furigana, and adds them to the library.
 
