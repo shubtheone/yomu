@@ -358,6 +358,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function translateText(text) {
         // Use MyMemory Translation API (free, no auth required)
+        // Note: Free tier has 5000 character limit per request and ~100 requests/day limit
+        
+        // Split text if too long (max 4500 chars to be safe)
+        if (text.length > 4500) {
+            console.warn('Text too long for single translation request, truncating to 4500 characters');
+            text = text.substring(0, 4500);
+        }
+        
         const encodedText = encodeURIComponent(text);
         const url = `https://api.mymemory.translated.net/get?q=${encodedText}&langpair=ja|en`;
         
@@ -366,10 +374,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             const data = await response.json();
             
-            if (data.responseStatus === 200 && data.responseData) {
+            // Check for valid translation response
+            if (data.responseData && data.responseData.translatedText) {
                 return data.responseData.translatedText;
             } else {
-                throw new Error('Translation failed');
+                throw new Error('Translation failed: ' + (data.responseDetails || 'Invalid response'));
             }
         } catch (error) {
             console.error('Translation API error:', error);
@@ -459,14 +468,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Process in batches with delay to respect API rate limits
-            const batchSize = 5; // Reduced batch size to avoid rate limiting
+            // Note: MyMemory free tier allows ~100 requests/day from an IP
+            const batchSize = 5;
             let completed = 0;
 
             for (let i = 0; i < total; i += batchSize) {
                 const batch = itemsToFetch.slice(i, i + batchSize);
 
-                // Update progress
-                showToast(`Downloading: ${Math.min(i + batch.length, total)} / ${total}`, 'info');
+                // Update progress with correct count
+                showToast(`Downloading: ${completed} / ${total}`, 'info');
 
                 await Promise.all(batch.map(async (item) => {
                     try {
