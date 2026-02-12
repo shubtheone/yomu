@@ -28,13 +28,11 @@ python3 -m http.server 8000
 # Or using Node.js http-server
 npx http-server -p 8000
 ```
-
 Open **http://localhost:8000** in your browser.
 
 ### Running with Python Server (Legacy)
 
 If you want to use the Python server with `deep-translator` library:
-
 ```bash
 # Install dependencies
 pip install deep-translator
