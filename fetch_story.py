@@ -128,7 +128,7 @@ CATALOG = {
     },
     "takasebune": {
         "type": "aozora",
-        "url": "https://www.aozora.gr.jp/cards/000129/files/691_15353.html",
+        "url": "https://www.aozora.gr.jp/cards/000129/files/691_15352.html",
         "id": "takasebune",
         "title_en": "The Boat on the Takase River",
         "author": "森鷗外",
