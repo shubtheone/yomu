@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
         reviewIndex: 0,
         customDictionary: loadFromStorage('yomu-custom-dict', {}),
         searchQuery: '',
-        chapterWordCount: 0,
     };
 
     // ─── DOM References ───
@@ -336,7 +335,6 @@ document.addEventListener('DOMContentLoaded', () => {
         content.forEach(lineTokens => {
             lineTokens.forEach(t => { totalChars += t.s.length; });
         });
-        state.chapterWordCount = totalChars;
 
         const readingTimeMin = Math.max(1, Math.round(totalChars / 500));
         const progressBar = document.getElementById('reading-progress-bar');
@@ -623,6 +621,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const flashcardBtn = document.getElementById('add-flashcard-btn');
         const flashcardBtnText = document.getElementById('flashcard-btn-text');
 
+        meaningEl.style.cursor = '';
+        meaningEl.onclick = null;
+
         wordEl.textContent = token.s;
         readingEl.textContent = token.r || '';
 
@@ -668,12 +669,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 })
                 .catch(() => {
+                    setMeaning('');
                     meaningEl.textContent = `No definition found for "${token.s}". Tap to search online.`;
                     meaningEl.style.cursor = 'pointer';
                     meaningEl.onclick = () => {
                         window.open(`https://jisho.org/search/${encodeURIComponent(token.s)}`, '_blank');
                     };
-                    setMeaning('');
                 });
         }
 
