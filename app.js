@@ -23,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
         customDictionary: loadFromStorage('yomu-custom-dict', {}),
         searchQuery: '',
         chapterWordCount: 0,
+        selectedGenre: 'all',
+        selectedGrammarLevel: 'all',
     };
 
     // ─── DOM References ───
@@ -57,6 +59,24 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.addEventListener('input', (e) => {
             state.searchQuery = e.target.value;
             renderLibrary(state.library);
+        });
+
+        document.querySelectorAll('#genre-filter .genre-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                state.selectedGenre = chip.dataset.genre;
+                document.querySelectorAll('#genre-filter .genre-chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                renderLibrary(state.library);
+            });
+        });
+
+        document.querySelectorAll('#grammar-level-filter .genre-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                state.selectedGrammarLevel = chip.dataset.level;
+                document.querySelectorAll('#grammar-level-filter .genre-chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                renderGrammar(state.grammar);
+            });
         });
     }
 
@@ -136,15 +156,24 @@ document.addEventListener('DOMContentLoaded', () => {
         grid.innerHTML = '';
 
         const searchTerm = (state.searchQuery || '').toLowerCase();
-        const filtered = searchTerm
-            ? novels.filter(n =>
+        let filtered = novels;
+
+        if (state.selectedGenre && state.selectedGenre !== 'all') {
+            filtered = filtered.filter(n =>
+                n.genre === state.selectedGenre ||
+                (n.tags || []).includes(state.selectedGenre)
+            );
+        }
+
+        if (searchTerm) {
+            filtered = filtered.filter(n =>
                 (n.title || '').toLowerCase().includes(searchTerm) ||
                 (n.title_en || '').toLowerCase().includes(searchTerm) ||
                 (n.author || '').toLowerCase().includes(searchTerm) ||
                 (n.author_en || '').toLowerCase().includes(searchTerm) ||
                 (n.tags || []).some(t => t.toLowerCase().includes(searchTerm))
-            )
-            : novels;
+            );
+        }
 
         document.getElementById('novel-count').textContent = `${filtered.length}`;
         novels = filtered;
@@ -1167,10 +1196,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderGrammar(grammarData) {
-        const container = document.getElementById('grammar-content');
+        const container = document.getElementById('grammar-sections');
+        if (!container) return;
         container.innerHTML = '';
 
-        grammarData.forEach(section => {
+        const level = state.selectedGrammarLevel || 'all';
+        const filtered = level === 'all'
+            ? grammarData
+            : grammarData.filter(s => s.level === level);
+
+        if (filtered.length === 0) {
+            container.innerHTML = '<p style="color:var(--text-tertiary);text-align:center;padding:2rem">No grammar points for this level.</p>';
+            return;
+        }
+
+        filtered.forEach(section => {
             const sectionEl = document.createElement('div');
             sectionEl.className = 'grammar-section';
 

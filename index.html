@@ -51,6 +51,15 @@
                     </svg>
                     <input type="text" id="library-search" class="library-search" placeholder="Search stories, authors, tags..." autocomplete="off" />
                 </div>
+                <div class="genre-filter" id="genre-filter">
+                    <button class="genre-chip active" data-genre="all">All</button>
+                    <button class="genre-chip" data-genre="literary">Literary</button>
+                    <button class="genre-chip" data-genre="horror">Horror</button>
+                    <button class="genre-chip" data-genre="adventure">Adventure</button>
+                    <button class="genre-chip" data-genre="philosophical">Philosophical</button>
+                    <button class="genre-chip" data-genre="satire">Satire</button>
+                    <button class="genre-chip" data-genre="poetry">Poetry</button>
+                </div>
                 <div class="section-label">
                     <span class="section-icon">📚</span>
                     <span>My Library</span>
@@ -256,9 +265,18 @@
                 </div>
             </header>
             <div class="grammar-content" id="grammar-content">
-                <div class="loading-skeleton">
-                    <div class="skeleton-card"></div>
-                    <div class="skeleton-card"></div>
+                <div class="genre-filter" id="grammar-level-filter">
+                    <button class="genre-chip active" data-level="all">All</button>
+                    <button class="genre-chip" data-level="Basic">Basic</button>
+                    <button class="genre-chip" data-level="N5">N5</button>
+                    <button class="genre-chip" data-level="N4">N4</button>
+                    <button class="genre-chip" data-level="N3">N3</button>
+                </div>
+                <div id="grammar-sections">
+                    <div class="loading-skeleton">
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                    </div>
                 </div>
             </div>
         </section>
