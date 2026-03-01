@@ -556,5 +556,61 @@
                 "example": "読みかけの本がたくさんあります。\n(Yomikake no hon ga takusan arimasu.)\nI have many half-read books."
             }
         ]
+    },
+    {
+        "id": "n3_essential",
+        "level": "N3",
+        "title": "Essential N3 Patterns (必須文型)",
+        "description": "Frequently tested N3 grammar patterns that appear in everyday conversation and JLPT exams.",
+        "points": [
+            {
+                "pattern": "〜ところ (~tokoro)",
+                "meaning": "About to / In the middle of / Just did",
+                "usage": "Describes the timing of an action. Verb dictionary form + ところ = about to; ~ているところ = in the middle of; ~たところ = just finished.",
+                "example": "今から出かけるところです。\n(Ima kara dekakeru tokoro desu.)\nI'm just about to go out."
+            },
+            {
+                "pattern": "〜てしまう (~te shimau)",
+                "meaning": "End up doing / Completely do",
+                "usage": "Expresses completion of an action, often with a sense of regret or that something happened unintentionally. Casual forms: ~ちゃう / ~じゃう.",
+                "example": "大事な書類をなくしてしまいました。\n(Daiji na shorui o nakushite shimaimashita.)\nI ended up losing an important document."
+            },
+            {
+                "pattern": "〜ことになる (~koto ni naru)",
+                "meaning": "It has been decided that",
+                "usage": "Expresses a decision made by external circumstances or a group, not by the speaker personally. Contrast with ~ことにする (personal decision).",
+                "example": "来月大阪に転勤することになりました。\n(Raigetsu Oosaka ni tenkin suru koto ni narimashita.)\nIt has been decided that I will transfer to Osaka next month."
+            },
+            {
+                "pattern": "〜かどうか (~ka dou ka)",
+                "meaning": "Whether or not",
+                "usage": "Embeds a yes/no question inside a larger sentence. Used with verbs like 分かる, 知る, 調べる.",
+                "example": "明日雨が降るかどうか分かりません。\n(Ashita ame ga furu ka dou ka wakarimasen.)\nI don't know whether or not it will rain tomorrow."
+            },
+            {
+                "pattern": "〜ようとする (~you to suru)",
+                "meaning": "Try to / Be about to",
+                "usage": "Expresses an attempt to do something (often implying difficulty or failure) or being on the verge of an action.",
+                "example": "ドアを開けようとしたが、鍵がかかっていた。\n(Doa o akeyou to shita ga, kagi ga kakatte ita.)\nI tried to open the door, but it was locked."
+            },
+            {
+                "pattern": "〜とおり / 〜どおり (~toori / ~doori)",
+                "meaning": "As / In accordance with",
+                "usage": "Indicates doing something exactly as instructed, expected, or described.",
+                "example": "説明書のとおりに組み立ててください。\n(Setsumeisho no toori ni kumitatete kudasai.)\nPlease assemble it according to the instructions."
+            },
+            {
+                "pattern": "〜最中に (~saichuu ni)",
+                "meaning": "In the very middle of",
+                "usage": "Emphasizes that something happens right in the middle of an ongoing activity, often unexpectedly.",
+                "example": "会議の最中に地震が起きた。\n(Kaigi no saichuu ni jishin ga okita.)\nAn earthquake occurred in the middle of the meeting."
+            },
+            {
+                "pattern": "〜ずに (~zu ni)",
+                "meaning": "Without doing",
+                "usage": "Literary/formal equivalent of ~ないで. Expresses not doing one action while doing another. する becomes せずに.",
+                "example": "朝ごはんを食べずに学校に行きました。\n(Asagohan o tabezu ni gakkou ni ikimashita.)\nI went to school without eating breakfast."
+            }
+        ]
     }
 ]
