@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
         reviewQueue: [],
         reviewIndex: 0,
         customDictionary: loadFromStorage('yomu-custom-dict', {}),
+        searchQuery: '',
+        chapterWordCount: 0,
     };
 
     // ─── DOM References ───
@@ -46,6 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
         loadGrammar();
         setupEventListeners();
         updateFlashcardStats();
+        setupSearch();
+    }
+
+    function setupSearch() {
+        const searchInput = document.getElementById('library-search');
+        if (!searchInput) return;
+        searchInput.addEventListener('input', (e) => {
+            state.searchQuery = e.target.value;
+            renderLibrary(state.library);
+        });
     }
 
     // ═══════════════════════════════════════
@@ -123,7 +135,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const grid = document.getElementById('library-grid');
         grid.innerHTML = '';
 
-        document.getElementById('novel-count').textContent = `${novels.length}`;
+        const searchTerm = (state.searchQuery || '').toLowerCase();
+        const filtered = searchTerm
+            ? novels.filter(n =>
+                (n.title || '').toLowerCase().includes(searchTerm) ||
+                (n.title_en || '').toLowerCase().includes(searchTerm) ||
+                (n.author || '').toLowerCase().includes(searchTerm) ||
+                (n.author_en || '').toLowerCase().includes(searchTerm) ||
+                (n.tags || []).some(t => t.toLowerCase().includes(searchTerm))
+            )
+            : novels;
+
+        document.getElementById('novel-count').textContent = `${filtered.length}`;
+        novels = filtered;
 
         novels.forEach((novel, index) => {
             const card = document.createElement('div');
@@ -307,6 +331,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const readerContent = document.getElementById('reader-content');
         readerContent.innerHTML = '';
         const fragment = document.createDocumentFragment();
+
+        let totalChars = 0;
+        content.forEach(lineTokens => {
+            lineTokens.forEach(t => { totalChars += t.s.length; });
+        });
+        state.chapterWordCount = totalChars;
+
+        const readingTimeMin = Math.max(1, Math.round(totalChars / 500));
+        const progressBar = document.getElementById('reading-progress-bar');
+        if (progressBar) progressBar.style.width = '0%';
+        const readingInfo = document.getElementById('reading-info');
+        if (readingInfo) readingInfo.textContent = `${totalChars.toLocaleString()} chars · ~${readingTimeMin} min`;
 
         content.forEach((lineTokens, index) => {
             const p = document.createElement('p');
@@ -591,13 +627,12 @@ document.addEventListener('DOMContentLoaded', () => {
         readingEl.textContent = token.r || '';
 
         // Check dictionary and custom dictionary
-        let meaning = state.dictionary[token.s] || state.customDictionary[token.s];
+        let meaning = lookupWord(token.s, token.r);
 
         const setMeaning = (m) => {
             meaningEl.textContent = m;
             flashcardBtn.dataset.meaning = m || '';
 
-            // Check flashcards
             const isInFlashcards = state.flashcards.some(fc => fc.word === token.s);
             if (isInFlashcards) {
                 flashcardBtn.classList.add('added');
@@ -614,33 +649,77 @@ document.addEventListener('DOMContentLoaded', () => {
         if (meaning) {
             setMeaning(meaning);
         } else {
-            // Not found -> Fetch translation
-            meaningEl.textContent = 'Fetching translation...';
-            // Disable button temporarily? No, user might want to add anyway.
+            meaningEl.textContent = 'Looking up...';
 
-            fetch('/api/translate', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text: token.s })
-            })
+            const encodedText = encodeURIComponent(token.s);
+            const url = `https://api.mymemory.translated.net/get?q=${encodedText}&langpair=ja|en`;
+
+            fetch(url)
                 .then(res => res.json())
                 .then(data => {
-                    const trans = data.translation;
-                    // Save to custom dictionary
-                    state.customDictionary[token.s] = trans;
-                    saveToStorage('yomu-custom-dict', state.customDictionary);
-
-                    // Update UI
-                    setMeaning(trans);
+                    if (data.responseData && data.responseData.translatedText) {
+                        const trans = data.responseData.translatedText;
+                        state.customDictionary[token.s] = trans;
+                        saveToStorage('yomu-custom-dict', state.customDictionary);
+                        setMeaning(trans);
+                    } else {
+                        setMeaning('');
+                        meaningEl.textContent = `No definition found for "${token.s}"`;
+                    }
                 })
-                .catch(err => {
-                    console.warn(err);
-                    meaningEl.textContent = `Definition not available for "${token.s}". Try searching online.`;
+                .catch(() => {
+                    meaningEl.textContent = `No definition found for "${token.s}". Tap to search online.`;
+                    meaningEl.style.cursor = 'pointer';
+                    meaningEl.onclick = () => {
+                        window.open(`https://jisho.org/search/${encodeURIComponent(token.s)}`, '_blank');
+                    };
                     setMeaning('');
                 });
         }
 
         popup.classList.remove('hidden');
+    }
+
+    function lookupWord(surface, reading) {
+        if (state.dictionary[surface]) return state.dictionary[surface];
+        if (state.customDictionary[surface]) return state.customDictionary[surface];
+
+        if (reading) {
+            if (state.dictionary[reading]) return state.dictionary[reading];
+        }
+
+        const tryForms = [];
+        if (surface.endsWith('っ') || surface.endsWith('ん')) {
+            tryForms.push(surface + 'だ');
+            tryForms.push(surface + 'で');
+        }
+        if (surface.endsWith('し')) tryForms.push(surface.slice(0, -1) + 'す');
+        if (surface.endsWith('き')) tryForms.push(surface.slice(0, -1) + 'く');
+        if (surface.endsWith('ぎ')) tryForms.push(surface.slice(0, -1) + 'ぐ');
+        if (surface.endsWith('い')) tryForms.push(surface.slice(0, -1) + 'う');
+        if (surface.endsWith('ち')) tryForms.push(surface.slice(0, -1) + 'つ');
+        if (surface.endsWith('り')) tryForms.push(surface.slice(0, -1) + 'る');
+        if (surface.endsWith('み')) tryForms.push(surface.slice(0, -1) + 'む');
+        if (surface.endsWith('び')) tryForms.push(surface.slice(0, -1) + 'ぶ');
+        if (surface.endsWith('に')) tryForms.push(surface.slice(0, -1) + 'ぬ');
+        if (surface.endsWith('て') || surface.endsWith('で')) {
+            tryForms.push(surface.slice(0, -1) + 'る');
+            tryForms.push(surface.slice(0, -1) + 'つ');
+        }
+        if (surface.endsWith('た')) {
+            tryForms.push(surface.slice(0, -1) + 'る');
+            tryForms.push(surface.slice(0, -1) + 'つ');
+        }
+        if (surface.endsWith('ない')) tryForms.push(surface.slice(0, -2) + 'る');
+        if (surface.endsWith('ます')) tryForms.push(surface.slice(0, -2) + 'る');
+        if (surface.endsWith('られ')) tryForms.push(surface.slice(0, -2) + 'る');
+        if (surface.endsWith('され')) tryForms.push(surface.slice(0, -2) + 'する');
+
+        for (const form of tryForms) {
+            if (state.dictionary[form]) return state.dictionary[form];
+        }
+
+        return null;
     }
 
     function hideDefinition() {
@@ -1018,12 +1097,48 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Save progress on scroll (debounced)
+        // Save progress on scroll (debounced) + update progress bar
         let progressTimeout;
-        document.getElementById('reader-content-wrapper').addEventListener('scroll', () => {
+        const readerWrapper = document.getElementById('reader-content-wrapper');
+        readerWrapper.addEventListener('scroll', () => {
             clearTimeout(progressTimeout);
             progressTimeout = setTimeout(saveReadingProgress, 500);
+
+            const progressBar = document.getElementById('reading-progress-bar');
+            if (progressBar) {
+                let pct = 0;
+                if (state.readingMode === 'vertical') {
+                    const max = readerWrapper.scrollWidth - readerWrapper.clientWidth;
+                    if (max > 0) pct = Math.abs(readerWrapper.scrollLeft) / max * 100;
+                } else {
+                    const max = readerWrapper.scrollHeight - readerWrapper.clientHeight;
+                    if (max > 0) pct = readerWrapper.scrollTop / max * 100;
+                }
+                progressBar.style.width = `${Math.min(100, Math.max(0, pct))}%`;
+            }
         });
+
+        // Swipe-to-go-back gesture for mobile reader
+        let touchStartX = 0;
+        let touchStartY = 0;
+        const readerView = document.getElementById('reader-view');
+        readerView.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        readerView.addEventListener('touchend', (e) => {
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            const dy = e.changedTouches[0].clientY - touchStartY;
+            if (state.readingMode === 'horizontal' && dx > 80 && Math.abs(dy) < 50 && touchStartX < 40) {
+                saveReadingProgress();
+                if (state.currentNovel) {
+                    showNovelDetail(state.currentNovel);
+                } else {
+                    navigateTo('library');
+                }
+            }
+        }, { passive: true });
 
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {

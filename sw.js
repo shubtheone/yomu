@@ -1,4 +1,4 @@
-const CACHE_NAME = 'yomu-cache-v10';
+const CACHE_NAME = 'yomu-cache-v11';
 const URLS_TO_CACHE = [
     './',
     './index.html',
@@ -13,9 +13,10 @@ const URLS_TO_CACHE = [
     './kumo_no_ito.json',
     './hashire_melos.json',
     './chumon.json',
-    './isekai_rezero.json',
-    './isekai_mushoku.json',
-    './isekai_bookworm.json'
+    './hana.json',
+    './yume_juuya.json',
+    './ningen_shikkaku.json',
+    './takasebune.json'
 ];
 
 // Install: pre-cache all assets

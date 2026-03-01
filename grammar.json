@@ -154,5 +154,407 @@
                 "example": "彼は親切で元気です。\n(Kare wa shinsetsu de genki desu.)\nHe is kind and energetic."
             }
         ]
+    },
+    {
+        "id": "n4_conditional",
+        "level": "N4",
+        "title": "Conditional Forms (条件形)",
+        "description": "Various ways to express 'if' and conditional relationships in Japanese.",
+        "points": [
+            {
+                "pattern": "〜たら (~tara)",
+                "meaning": "If / When",
+                "usage": "General conditional. Used for both hypothetical and temporal conditions.",
+                "example": "雨が降ったら、家にいます。\n(Ame ga futtara, ie ni imasu.)\nIf it rains, I will stay home."
+            },
+            {
+                "pattern": "〜ば (~ba)",
+                "meaning": "If",
+                "usage": "Hypothetical conditional emphasizing the condition itself. Often used for general truths.",
+                "example": "安ければ、買います。\n(Yasukereba, kaimasu.)\nIf it's cheap, I'll buy it."
+            },
+            {
+                "pattern": "〜なら (~nara)",
+                "meaning": "If it's the case that",
+                "usage": "Contextual conditional. Used when reacting to new information or a topic raised by someone.",
+                "example": "日本に行くなら、京都がおすすめです。\n(Nihon ni iku nara, Kyouto ga osusume desu.)\nIf you're going to Japan, I recommend Kyoto."
+            },
+            {
+                "pattern": "〜と (~to)",
+                "meaning": "Whenever / If (natural consequence)",
+                "usage": "Expresses automatic or habitual results. Used for natural consequences and instructions.",
+                "example": "春になると、桜が咲きます。\n(Haru ni naru to, sakura ga sakimasu.)\nWhenever spring comes, the cherry blossoms bloom."
+            }
+        ]
+    },
+    {
+        "id": "n4_passive",
+        "level": "N4",
+        "title": "Passive & Causative (受身・使役)",
+        "description": "Forms for expressing passive actions, causation, and forced actions.",
+        "points": [
+            {
+                "pattern": "〜(ら)れる (~(ra)reru)",
+                "meaning": "Is done (passive)",
+                "usage": "Passive voice. The subject receives the action. Often implies inconvenience in Japanese.",
+                "example": "弟にケーキを食べられました。\n(Otouto ni keeki o taberaremashita.)\nMy cake was eaten by my younger brother."
+            },
+            {
+                "pattern": "〜(さ)せる (~(sa)seru)",
+                "meaning": "Make / Let someone do",
+                "usage": "Causative form. Indicates making or allowing someone to perform an action.",
+                "example": "母は子供に野菜を食べさせました。\n(Haha wa kodomo ni yasai o tabesasemashita.)\nThe mother made the child eat vegetables."
+            },
+            {
+                "pattern": "〜(さ)せられる (~(sa)serareru)",
+                "meaning": "Is made to do (causative-passive)",
+                "usage": "Combines causative and passive. The subject is forced to do something against their will.",
+                "example": "毎日残業させられています。\n(Mainichi zangyou saserarete imasu.)\nI am made to work overtime every day."
+            }
+        ]
+    },
+    {
+        "id": "n4_potential",
+        "level": "N4",
+        "title": "Potential & Volitional (可能・意向)",
+        "description": "Expressing ability, intention, and decisions.",
+        "points": [
+            {
+                "pattern": "〜(ら)れる (~(ra)reru)",
+                "meaning": "Can do (potential)",
+                "usage": "Potential form. Expresses ability or possibility. Ichidan verbs add -られる, godan verbs change the ending.",
+                "example": "漢字が読めますか。\n(Kanji ga yomemasu ka.)\nCan you read kanji?"
+            },
+            {
+                "pattern": "〜よう (~you)",
+                "meaning": "Let's / I will (volitional)",
+                "usage": "Volitional form. Expresses intention or suggests doing something together.",
+                "example": "明日早く起きよう。\n(Ashita hayaku okiyou.)\nLet's wake up early tomorrow."
+            },
+            {
+                "pattern": "〜つもり (~tsumori)",
+                "meaning": "Intend to",
+                "usage": "Expresses a plan or intention that has already been decided.",
+                "example": "来年日本に留学するつもりです。\n(Rainen Nihon ni ryuugaku suru tsumori desu.)\nI intend to study abroad in Japan next year."
+            },
+            {
+                "pattern": "〜ことにする (~koto ni suru)",
+                "meaning": "Decide to",
+                "usage": "Expresses a decision made by the speaker. Emphasizes the act of deciding.",
+                "example": "毎朝ジョギングすることにしました。\n(Maiasa jogingu suru koto ni shimashita.)\nI decided to jog every morning."
+            }
+        ]
+    },
+    {
+        "id": "n4_giving",
+        "level": "N4",
+        "title": "Giving & Receiving (授受)",
+        "description": "Expressions for giving and receiving actions, reflecting social relationships.",
+        "points": [
+            {
+                "pattern": "〜てあげる (~te ageru)",
+                "meaning": "Do something for someone",
+                "usage": "The speaker (or in-group) does a favor for someone else. Can sound condescending if used carelessly.",
+                "example": "友達に日本語を教えてあげました。\n(Tomodachi ni Nihongo o oshiete agemashita.)\nI taught Japanese to my friend (as a favor)."
+            },
+            {
+                "pattern": "〜てもらう (~te morau)",
+                "meaning": "Have someone do something",
+                "usage": "The speaker receives a favor from someone. Implies gratitude.",
+                "example": "先生に作文を直してもらいました。\n(Sensei ni sakubun o naoshite moraimashita.)\nI had my teacher correct my essay."
+            },
+            {
+                "pattern": "〜てくれる (~te kureru)",
+                "meaning": "Someone does something for me",
+                "usage": "Someone does a favor for the speaker (or in-group). Expresses appreciation.",
+                "example": "母が弁当を作ってくれました。\n(Haha ga bentou o tsukutte kuremashita.)\nMy mother made a bento for me."
+            }
+        ]
+    },
+    {
+        "id": "n4_hearsay",
+        "level": "N4",
+        "title": "Hearsay & Appearance (伝聞・様態)",
+        "description": "Ways to express what something looks like, what you heard, and what seems to be the case.",
+        "points": [
+            {
+                "pattern": "〜そうだ (looks like) (~sou da)",
+                "meaning": "Looks like / Seems like",
+                "usage": "Describes appearance based on direct observation. Attaches to verb stems or adjective stems.",
+                "example": "このケーキはおいしそうです。\n(Kono keeki wa oishisou desu.)\nThis cake looks delicious."
+            },
+            {
+                "pattern": "〜そうだ (I heard) (~sou da)",
+                "meaning": "I heard that",
+                "usage": "Reports information heard from another source. Attaches to the plain form of verbs and adjectives.",
+                "example": "明日は雨だそうです。\n(Ashita wa ame da sou desu.)\nI heard that it will rain tomorrow."
+            },
+            {
+                "pattern": "〜ようだ / 〜みたいだ (~you da / ~mitai da)",
+                "meaning": "It seems like / It appears",
+                "usage": "Expresses conjecture based on evidence. みたいだ is more casual than ようだ.",
+                "example": "彼は忙しいようです。\n(Kare wa isogashii you desu.)\nIt seems like he is busy."
+            },
+            {
+                "pattern": "〜らしい (~rashii)",
+                "meaning": "Apparently / It seems",
+                "usage": "Expresses inference based on indirect evidence or hearsay. Less certain than ようだ.",
+                "example": "新しいレストランはおいしいらしいです。\n(Atarashii resutoran wa oishii rashii desu.)\nApparently the new restaurant is good."
+            }
+        ]
+    },
+    {
+        "id": "n4_conjunctions",
+        "level": "N4",
+        "title": "Conjunctions & Connectors",
+        "description": "Patterns for connecting clauses and expressing contrast, concession, and addition.",
+        "points": [
+            {
+                "pattern": "〜ても (~te mo)",
+                "meaning": "Even if",
+                "usage": "Expresses that the result holds true regardless of the condition.",
+                "example": "雨が降っても、サッカーをします。\n(Ame ga futte mo, sakkaa o shimasu.)\nEven if it rains, I will play soccer."
+            },
+            {
+                "pattern": "〜のに (~noni)",
+                "meaning": "Despite / Even though",
+                "usage": "Expresses unexpected contrast or disappointment about a result.",
+                "example": "たくさん勉強したのに、試験に落ちました。\n(Takusan benkyou shita noni, shiken ni ochimashita.)\nDespite studying a lot, I failed the exam."
+            },
+            {
+                "pattern": "〜ながら (~nagara)",
+                "meaning": "While doing",
+                "usage": "Expresses two simultaneous actions performed by the same subject.",
+                "example": "音楽を聞きながら、料理をします。\n(Ongaku o kikinagara, ryouri o shimasu.)\nI cook while listening to music."
+            },
+            {
+                "pattern": "〜し (~shi)",
+                "meaning": "And moreover / Not only...but also",
+                "usage": "Lists multiple reasons or qualities. Often used to justify a conclusion.",
+                "example": "この店は安いし、おいしいし、最高です。\n(Kono mise wa yasui shi, oishii shi, saikou desu.)\nThis restaurant is cheap, delicious, and the best."
+            }
+        ]
+    },
+    {
+        "id": "n3_expressions",
+        "level": "N3",
+        "title": "Key Expressions (重要表現)",
+        "description": "Important intermediate expressions for describing habits, changes, and recent events.",
+        "points": [
+            {
+                "pattern": "〜ことがある (~koto ga aru)",
+                "meaning": "Sometimes / There are times when",
+                "usage": "Describes something that happens occasionally. Uses the dictionary form of the verb.",
+                "example": "朝ごはんを食べないことがあります。\n(Asagohan o tabenai koto ga arimasu.)\nThere are times when I don't eat breakfast."
+            },
+            {
+                "pattern": "〜ようにする (~you ni suru)",
+                "meaning": "Try to / Make an effort to",
+                "usage": "Expresses a conscious effort to do or avoid something.",
+                "example": "毎日運動するようにしています。\n(Mainichi undou suru you ni shite imasu.)\nI try to exercise every day."
+            },
+            {
+                "pattern": "〜ようになる (~you ni naru)",
+                "meaning": "Come to / Become able to",
+                "usage": "Expresses a gradual change in ability or state over time.",
+                "example": "日本語が話せるようになりました。\n(Nihongo ga hanaseru you ni narimashita.)\nI became able to speak Japanese."
+            },
+            {
+                "pattern": "〜ことにしている (~koto ni shite iru)",
+                "meaning": "Make it a rule to / Habitually",
+                "usage": "Describes a personal rule or habit that one has decided to maintain.",
+                "example": "寝る前に本を読むことにしています。\n(Neru mae ni hon o yomu koto ni shite imasu.)\nI make it a rule to read before bed."
+            },
+            {
+                "pattern": "〜ばかり (~bakari)",
+                "meaning": "Just did / Nothing but",
+                "usage": "Indicates that an action was just completed recently, or that someone does nothing but one thing.",
+                "example": "今昼ごはんを食べたばかりです。\n(Ima hirugohan o tabeta bakari desu.)\nI just ate lunch."
+            }
+        ]
+    },
+    {
+        "id": "n3_formal",
+        "level": "N3",
+        "title": "Formal Patterns (敬語表現)",
+        "description": "Honorific and humble expressions used in formal and business contexts.",
+        "points": [
+            {
+                "pattern": "〜ていただく (~te itadaku)",
+                "meaning": "Humbly receive the favor of",
+                "usage": "Humble form of てもらう. Used in formal situations to express receiving a favor.",
+                "example": "先生に推薦状を書いていただきました。\n(Sensei ni suisenjou o kaite itadakimashita.)\nI humbly had my teacher write a recommendation letter."
+            },
+            {
+                "pattern": "〜ございます (~gozaimasu)",
+                "meaning": "There is / It is (polite)",
+                "usage": "Polite form of あります/です. Used in formal speech and customer service.",
+                "example": "お手洗いは二階でございます。\n(Otearai wa nikai de gozaimasu.)\nThe restroom is on the second floor."
+            },
+            {
+                "pattern": "〜てまいります (~te mairimasu)",
+                "meaning": "Will go and do (humble)",
+                "usage": "Humble form of ていきます. Used to humbly describe one's own actions in formal settings.",
+                "example": "努力してまいります。\n(Doryoku shite mairimasu.)\nI will continue to make efforts (humble)."
+            },
+            {
+                "pattern": "おVになる (o V ni naru)",
+                "meaning": "Honorific verb form",
+                "usage": "Honorific pattern to elevate the actions of the person you are speaking about.",
+                "example": "先生はもうお帰りになりました。\n(Sensei wa mou okaeri ni narimashita.)\nThe teacher has already left (honorific)."
+            }
+        ]
+    },
+    {
+        "id": "n3_reasoning",
+        "level": "N3",
+        "title": "Reasoning & Cause (理由・原因)",
+        "description": "Patterns for expressing logical conclusions, expectations, and reasoning.",
+        "points": [
+            {
+                "pattern": "〜わけだ (~wake da)",
+                "meaning": "It means that / No wonder",
+                "usage": "Indicates a logical conclusion drawn from known facts or circumstances.",
+                "example": "毎日練習しているから、上手なわけだ。\n(Mainichi renshuu shite iru kara, jouzu na wake da.)\nHe practices every day, so no wonder he's good."
+            },
+            {
+                "pattern": "〜はずだ (~hazu da)",
+                "meaning": "Should be / Is expected to",
+                "usage": "Expresses an expectation based on logic or evidence. Implies confidence in the conclusion.",
+                "example": "彼はもう着いたはずです。\n(Kare wa mou tsuita hazu desu.)\nHe should have arrived by now."
+            },
+            {
+                "pattern": "〜わけがない (~wake ga nai)",
+                "meaning": "There's no way that",
+                "usage": "Strongly denies a possibility based on logical reasoning.",
+                "example": "彼がそんなことを言うわけがない。\n(Kare ga sonna koto o iu wake ga nai.)\nThere's no way he would say such a thing."
+            },
+            {
+                "pattern": "〜に違いない (~ni chigai nai)",
+                "meaning": "Must be / No doubt",
+                "usage": "Expresses strong certainty or conviction about something.",
+                "example": "あの音は雷に違いない。\n(Ano oto wa kaminari ni chigai nai.)\nThat sound must be thunder."
+            },
+            {
+                "pattern": "〜わけではない (~wake dewa nai)",
+                "meaning": "It's not that / It doesn't mean that",
+                "usage": "Partially denies something. Clarifies that a general assumption is not entirely true.",
+                "example": "嫌いなわけではないが、あまり食べません。\n(Kirai na wake dewa nai ga, amari tabemasen.)\nIt's not that I dislike it, but I don't eat it much."
+            }
+        ]
+    },
+    {
+        "id": "n3_comparison",
+        "level": "N3",
+        "title": "Comparison & Degree (比較・程度)",
+        "description": "Patterns for expressing extent, proportional relationships, and emphasis.",
+        "points": [
+            {
+                "pattern": "〜ほど (~hodo)",
+                "meaning": "To the extent that",
+                "usage": "Expresses the degree or extent of something. Often used for emphasis or comparison.",
+                "example": "泣きたいほど嬉しかったです。\n(Nakitai hodo ureshikatta desu.)\nI was so happy I could cry."
+            },
+            {
+                "pattern": "〜ば〜ほど (~ba ~hodo)",
+                "meaning": "The more...the more",
+                "usage": "Expresses a proportional relationship between two things.",
+                "example": "練習すればするほど上手になります。\n(Renshuu sureba suru hodo jouzu ni narimasu.)\nThe more you practice, the better you get."
+            },
+            {
+                "pattern": "〜くらい / 〜ぐらい (~kurai / ~gurai)",
+                "meaning": "About / To the extent of",
+                "usage": "Indicates an approximate degree or amount. Can also express a minimal expectation.",
+                "example": "自分の名前くらい漢字で書けます。\n(Jibun no namae kurai kanji de kakemasu.)\nI can at least write my own name in kanji."
+            },
+            {
+                "pattern": "〜さえ〜ば (~sae ~ba)",
+                "meaning": "If only / As long as",
+                "usage": "Emphasizes a single sufficient condition for a result.",
+                "example": "薬を飲みさえすれば、治ります。\n(Kusuri o nomi sae sureba, naorimasu.)\nIf you just take the medicine, you'll get better."
+            },
+            {
+                "pattern": "〜こそ (~koso)",
+                "meaning": "Precisely / It is exactly",
+                "usage": "Adds strong emphasis to the preceding word, highlighting it as the most important element.",
+                "example": "今年こそ日本語能力試験に合格したい。\n(Kotoshi koso Nihongo nouryoku shiken ni goukaku shitai.)\nThis year, for sure, I want to pass the JLPT."
+            }
+        ]
+    },
+    {
+        "id": "n3_complex",
+        "level": "N3",
+        "title": "Complex Sentences (複文)",
+        "description": "Patterns for constructing complex sentences with purpose, contrast, and topic reference.",
+        "points": [
+            {
+                "pattern": "〜ために (~tame ni)",
+                "meaning": "In order to / Because of",
+                "usage": "Expresses purpose (with volitional verbs) or cause (with non-volitional verbs/nouns).",
+                "example": "留学するために、お金を貯めています。\n(Ryuugaku suru tame ni, okane o tamete imasu.)\nI am saving money in order to study abroad."
+            },
+            {
+                "pattern": "〜ように (~you ni)",
+                "meaning": "So that / In such a way that",
+                "usage": "Expresses a desired outcome or goal. Used with non-volitional verbs or potential forms.",
+                "example": "忘れないように、メモを取りました。\n(Wasurenai you ni, memo o torimashita.)\nI took notes so that I wouldn't forget."
+            },
+            {
+                "pattern": "〜として (~to shite)",
+                "meaning": "As / In the role of",
+                "usage": "Indicates a role, capacity, or status in which someone or something acts.",
+                "example": "彼は医者として働いています。\n(Kare wa isha to shite hataraite imasu.)\nHe works as a doctor."
+            },
+            {
+                "pattern": "〜に対して (~ni taishite)",
+                "meaning": "Toward / In contrast to",
+                "usage": "Indicates the target of an action or feeling, or draws a contrast between two things.",
+                "example": "兄はスポーツが好きなのに対して、弟は読書が好きです。\n(Ani wa supootsu ga suki na noni taishite, otouto wa dokusho ga suki desu.)\nWhile the older brother likes sports, the younger brother likes reading."
+            },
+            {
+                "pattern": "〜について (~ni tsuite)",
+                "meaning": "About / Regarding",
+                "usage": "Indicates the topic or subject being discussed or investigated.",
+                "example": "日本の文化について研究しています。\n(Nihon no bunka ni tsuite kenkyuu shite imasu.)\nI am researching about Japanese culture."
+            }
+        ]
+    },
+    {
+        "id": "n3_change",
+        "level": "N3",
+        "title": "Change & State (変化・状態)",
+        "description": "Patterns for expressing ongoing states, habits, and degrees of completion.",
+        "points": [
+            {
+                "pattern": "〜ようにしている (~you ni shite iru)",
+                "meaning": "Make a habit of / Try to regularly",
+                "usage": "Describes an ongoing effort or habit that one consciously maintains.",
+                "example": "野菜を多く食べるようにしています。\n(Yasai o ooku taberu you ni shite imasu.)\nI make a habit of eating lots of vegetables."
+            },
+            {
+                "pattern": "〜っぱなし (~ppanashi)",
+                "meaning": "Left in a state / Keep doing",
+                "usage": "Indicates something is left in an undesirable state, or an action continues without stopping.",
+                "example": "エアコンをつけっぱなしで寝てしまいました。\n(Eakon o tsukeppanashi de nete shimaimashita.)\nI fell asleep with the air conditioner left on."
+            },
+            {
+                "pattern": "〜たまま (~ta mama)",
+                "meaning": "In the state of / As it is",
+                "usage": "Describes a state that remains unchanged, often implying it should have been changed.",
+                "example": "靴を履いたまま家に入らないでください。\n(Kutsu o haita mama ie ni hairanaide kudasai.)\nPlease don't enter the house with your shoes on."
+            },
+            {
+                "pattern": "〜きる (~kiru)",
+                "meaning": "Completely do / Do to the end",
+                "usage": "Expresses completing an action fully or doing something to its limit.",
+                "example": "マラソンを走りきりました。\n(Marason o hashirikirimashita.)\nI ran the entire marathon to the end."
+            },
+            {
+                "pattern": "〜かける (~kakeru)",
+                "meaning": "About to / Half-done",
+                "usage": "Indicates that an action has started but is not yet finished, or is on the verge of happening.",
+                "example": "読みかけの本がたくさんあります。\n(Yomikake no hon ga takusan arimasu.)\nI have many half-read books."
+            }
+        ]
     }
 ]

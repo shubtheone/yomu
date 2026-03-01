@@ -115,5 +115,122 @@
         "filename": "chumon.json"
       }
     ]
+  },
+  {
+    "id": "hana",
+    "title": "鼻",
+    "title_en": "The Nose",
+    "author": "芥川龍之介",
+    "author_en": "Akutagawa Ryunosuke",
+    "cover_image": "",
+    "gradient": [
+      "#e74c3c",
+      "#d35400",
+      "#2d0a0a"
+    ],
+    "summary_ja": "長い鼻を持つ内供の鼻が、ある方法で短くなる。しかし周囲の反応は変わらず、彼は再び鼻が長くなることを願う。",
+    "summary_en": "A monk with an extraordinarily long nose manages to shorten it, but finds the world's reaction just as unkind — and wishes it would grow back.",
+    "tags": [
+      "classic",
+      "complete",
+      "short-story",
+      "satire"
+    ],
+    "chapters": [
+      {
+        "id": "ch1",
+        "title": "鼻",
+        "title_en": "The Nose",
+        "filename": "hana.json"
+      }
+    ]
+  },
+  {
+    "id": "yume_juuya",
+    "title": "夢十夜",
+    "title_en": "Ten Nights of Dreams",
+    "author": "夏目漱石",
+    "author_en": "Natsume Soseki",
+    "cover_image": "",
+    "gradient": [
+      "#6c5ce7",
+      "#a29bfe",
+      "#1a0a28"
+    ],
+    "summary_ja": "「こんな夢を見た」で始まる十の夢。漱石が描く幻想的で不思議な夢の世界。怪談的な雰囲気を持つ連作短編。",
+    "summary_en": "Ten dreams, each beginning with 'I had this dream.' Soseki's fantastical, eerie dreamscapes — a collection of surreal short tales.",
+    "tags": [
+      "classic",
+      "complete",
+      "short-story",
+      "surreal"
+    ],
+    "chapters": [
+      {
+        "id": "ch1",
+        "title": "夢十夜",
+        "title_en": "Ten Nights of Dreams",
+        "filename": "yume_juuya.json"
+      }
+    ]
+  },
+  {
+    "id": "ningen_shikkaku",
+    "title": "人間失格",
+    "title_en": "No Longer Human",
+    "author": "太宰治",
+    "author_en": "Dazai Osamu",
+    "cover_image": "",
+    "gradient": [
+      "#2c2c34",
+      "#1a1a2e",
+      "#0d0d14"
+    ],
+    "summary_ja": "「恥の多い生涯を送って来ました」——人間の資格がないと感じる男の手記。太宰治の代表作であり、遺作となった自伝的小説。",
+    "summary_en": "\"Mine has been a life of much shame.\" — The notebooks of a man who feels disqualified from being human. Dazai's masterpiece and semi-autobiographical final work.",
+    "tags": [
+      "classic",
+      "complete",
+      "novel",
+      "literary",
+      "dark"
+    ],
+    "chapters": [
+      {
+        "id": "ch1",
+        "title": "人間失格",
+        "title_en": "No Longer Human",
+        "filename": "ningen_shikkaku.json"
+      }
+    ]
+  },
+  {
+    "id": "takasebune",
+    "title": "高瀬舟",
+    "title_en": "The Boat on the Takase River",
+    "author": "森鷗外",
+    "author_en": "Mori Ogai",
+    "cover_image": "",
+    "gradient": [
+      "#3a6186",
+      "#89253e",
+      "#1a0a14"
+    ],
+    "summary_ja": "島流しの罪人を乗せた高瀬舟。護送する同心・庄兵衛は、弟を殺した罪人の穏やかな表情に疑問を抱く。安楽死と知足の問題を問う短編。",
+    "summary_en": "A boat on the Takase River carries a convict sentenced to exile. The escorting officer is puzzled by the convict's serene expression. A story exploring euthanasia and contentment.",
+    "tags": [
+      "classic",
+      "complete",
+      "short-story",
+      "philosophical"
+    ],
+    "chapters": [
+      {
+        "id": "ch1",
+        "title": "高瀬舟",
+        "title_en": "The Boat on the Takase River",
+        "filename": "takasebune.json"
+      }
+    ]
   }
 ]
