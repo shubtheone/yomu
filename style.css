@@ -1680,6 +1680,53 @@ rt {
 }
 
 /* ═══════════════════════════════════════
+   GENRE FILTER CHIPS
+   ═══════════════════════════════════════ */
+.genre-filter {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 0 0 16px;
+    margin-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.genre-filter::-webkit-scrollbar {
+    display: none;
+}
+
+.genre-chip {
+    flex-shrink: 0;
+    padding: 7px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+}
+
+.genre-chip:hover {
+    border-color: var(--accent);
+    color: var(--text-primary);
+}
+
+.genre-chip.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 2px 8px var(--accent-glow);
+}
+
+/* ═══════════════════════════════════════
    SEARCH BAR
    ═══════════════════════════════════════ */
 .library-search-wrapper {

@@ -6,27 +6,12 @@
     "author": "芥川龍之介",
     "author_en": "Akutagawa Ryunosuke",
     "cover_image": "covers/kumo_no_ito.jpg",
-    "gradient": [
-      "#e8b44a",
-      "#8B4513",
-      "#2d1a08"
-    ],
+    "gradient": ["#e8b44a", "#8B4513", "#2d1a08"],
     "summary_ja": "極楽から地獄を覗いた釈迦は、地獄に落ちた大泥棒カンダタに一筋の蜘蛛の糸を下ろす。カンダタは糸を辿り地獄を脱出しようとするが…",
     "summary_en": "Buddha lowers a single spider's thread from Paradise to the great thief Kandata in Hell. As Kandata climbs toward salvation, his selfishness leads to his downfall.",
-    "tags": [
-      "classic",
-      "complete",
-      "short-story",
-      "moral-tale"
-    ],
-    "chapters": [
-      {
-        "id": "ch1",
-        "title": "蜘蛛の糸",
-        "title_en": "The Spider's Thread (Complete)",
-        "filename": "kumo_no_ito.json"
-      }
-    ]
+    "genre": "moral-tale",
+    "tags": ["classic", "complete", "short-story", "moral-tale", "fantasy"],
+    "chapters": [{"id": "ch1", "title": "蜘蛛の糸", "title_en": "The Spider's Thread (Complete)", "filename": "kumo_no_ito.json"}]
   },
   {
     "id": "rashomon",
@@ -35,27 +20,12 @@
     "author": "芥川龍之介",
     "author_en": "Akutagawa Ryunosuke",
     "cover_image": "covers/rashomon.jpg",
-    "gradient": [
-      "#c0392b",
-      "#8B1A1A",
-      "#2D0A0A"
-    ],
+    "gradient": ["#c0392b", "#8B1A1A", "#2D0A0A"],
     "summary_ja": "下人が羅生門の下で雨やみを待っていた。彼は生きるために悪を選ぶ老婆を見て、自らも悪に染まる決意をする。",
     "summary_en": "A servant waits under the Rashomon gate. Witnessing an old woman doing evil to survive, he decides to embrace evil himself.",
-    "tags": [
-      "classic",
-      "complete",
-      "short-story",
-      "literary"
-    ],
-    "chapters": [
-      {
-        "id": "ch1",
-        "title": "羅生門",
-        "title_en": "Rashomon (Complete)",
-        "filename": "rashomon.json"
-      }
-    ]
+    "genre": "literary",
+    "tags": ["classic", "complete", "short-story", "literary", "dark"],
+    "chapters": [{"id": "ch1", "title": "羅生門", "title_en": "Rashomon (Complete)", "filename": "rashomon.json"}]
   },
   {
     "id": "hashire_melos",
@@ -64,27 +34,12 @@
     "author": "太宰治",
     "author_en": "Dazai Osamu",
     "cover_image": "covers/hashire_melos.jpg",
-    "gradient": [
-      "#2980b9",
-      "#1B4F72",
-      "#0A1929"
-    ],
+    "gradient": ["#2980b9", "#1B4F72", "#0A1929"],
     "summary_ja": "暴君ディオニスに死刑を宣告されたメロスは、友人を人質にして妹の結婚式へ向かう。約束の三日目、様々な困難を乗り越え走り続けるメロスの姿を描く。",
     "summary_en": "Sentenced to death by the tyrant Dionysius, Melos leaves his friend as hostage and races back for his sister's wedding. A tale of trust, friendship, and perseverance.",
-    "tags": [
-      "classic",
-      "complete",
-      "short-story",
-      "friendship"
-    ],
-    "chapters": [
-      {
-        "id": "ch1",
-        "title": "走れメロス",
-        "title_en": "Run, Melos! (Complete)",
-        "filename": "hashire_melos.json"
-      }
-    ]
+    "genre": "adventure",
+    "tags": ["classic", "complete", "short-story", "adventure", "friendship"],
+    "chapters": [{"id": "ch1", "title": "走れメロス", "title_en": "Run, Melos! (Complete)", "filename": "hashire_melos.json"}]
   },
   {
     "id": "chumon",
@@ -93,28 +48,12 @@
     "author": "宮沢賢治",
     "author_en": "Miyazawa Kenji",
     "cover_image": "covers/chumon.jpg",
-    "gradient": [
-      "#27ae60",
-      "#145A32",
-      "#0A2D19"
-    ],
+    "gradient": ["#27ae60", "#145A32", "#0A2D19"],
     "summary_ja": "二人の紳士が山中で「山猫軒」という不思議な料理店に入る。次々と出される奇妙な「注文」に従ううちに、恐ろしい真実に気づく。",
     "summary_en": "Two gentlemen enter a mysterious restaurant called 'Wildcat House' in the mountains. As they follow increasingly bizarre instructions, they discover a terrifying truth.",
-    "tags": [
-      "classic",
-      "complete",
-      "short-story",
-      "fantasy",
-      "horror"
-    ],
-    "chapters": [
-      {
-        "id": "ch1",
-        "title": "注文の多い料理店",
-        "title_en": "The Restaurant of Many Orders (Complete)",
-        "filename": "chumon.json"
-      }
-    ]
+    "genre": "horror",
+    "tags": ["classic", "complete", "short-story", "fantasy", "horror", "suspense"],
+    "chapters": [{"id": "ch1", "title": "注文の多い料理店", "title_en": "The Restaurant of Many Orders (Complete)", "filename": "chumon.json"}]
   },
   {
     "id": "hana",
@@ -123,27 +62,12 @@
     "author": "芥川龍之介",
     "author_en": "Akutagawa Ryunosuke",
     "cover_image": "",
-    "gradient": [
-      "#e74c3c",
-      "#d35400",
-      "#2d0a0a"
-    ],
+    "gradient": ["#e74c3c", "#d35400", "#2d0a0a"],
     "summary_ja": "長い鼻を持つ内供の鼻が、ある方法で短くなる。しかし周囲の反応は変わらず、彼は再び鼻が長くなることを願う。",
     "summary_en": "A monk with an extraordinarily long nose manages to shorten it, but finds the world's reaction just as unkind — and wishes it would grow back.",
-    "tags": [
-      "classic",
-      "complete",
-      "short-story",
-      "satire"
-    ],
-    "chapters": [
-      {
-        "id": "ch1",
-        "title": "鼻",
-        "title_en": "The Nose",
-        "filename": "hana.json"
-      }
-    ]
+    "genre": "satire",
+    "tags": ["classic", "complete", "short-story", "satire", "literary"],
+    "chapters": [{"id": "ch1", "title": "鼻", "title_en": "The Nose", "filename": "hana.json"}]
   },
   {
     "id": "yume_juuya",
@@ -152,27 +76,12 @@
     "author": "夏目漱石",
     "author_en": "Natsume Soseki",
     "cover_image": "",
-    "gradient": [
-      "#6c5ce7",
-      "#a29bfe",
-      "#1a0a28"
-    ],
+    "gradient": ["#6c5ce7", "#a29bfe", "#1a0a28"],
     "summary_ja": "「こんな夢を見た」で始まる十の夢。漱石が描く幻想的で不思議な夢の世界。怪談的な雰囲気を持つ連作短編。",
     "summary_en": "Ten dreams, each beginning with 'I had this dream.' Soseki's fantastical, eerie dreamscapes — a collection of surreal short tales.",
-    "tags": [
-      "classic",
-      "complete",
-      "short-story",
-      "surreal"
-    ],
-    "chapters": [
-      {
-        "id": "ch1",
-        "title": "夢十夜",
-        "title_en": "Ten Nights of Dreams",
-        "filename": "yume_juuya.json"
-      }
-    ]
+    "genre": "horror",
+    "tags": ["classic", "complete", "short-story", "surreal", "horror", "suspense"],
+    "chapters": [{"id": "ch1", "title": "夢十夜", "title_en": "Ten Nights of Dreams", "filename": "yume_juuya.json"}]
   },
   {
     "id": "ningen_shikkaku",
@@ -181,28 +90,12 @@
     "author": "太宰治",
     "author_en": "Dazai Osamu",
     "cover_image": "",
-    "gradient": [
-      "#2c2c34",
-      "#1a1a2e",
-      "#0d0d14"
-    ],
+    "gradient": ["#2c2c34", "#1a1a2e", "#0d0d14"],
     "summary_ja": "「恥の多い生涯を送って来ました」——人間の資格がないと感じる男の手記。太宰治の代表作であり、遺作となった自伝的小説。",
     "summary_en": "\"Mine has been a life of much shame.\" — The notebooks of a man who feels disqualified from being human. Dazai's masterpiece and semi-autobiographical final work.",
-    "tags": [
-      "classic",
-      "complete",
-      "novel",
-      "literary",
-      "dark"
-    ],
-    "chapters": [
-      {
-        "id": "ch1",
-        "title": "人間失格",
-        "title_en": "No Longer Human",
-        "filename": "ningen_shikkaku.json"
-      }
-    ]
+    "genre": "literary",
+    "tags": ["classic", "complete", "novel", "literary", "dark", "psychological"],
+    "chapters": [{"id": "ch1", "title": "人間失格", "title_en": "No Longer Human", "filename": "ningen_shikkaku.json"}]
   },
   {
     "id": "takasebune",
@@ -211,26 +104,39 @@
     "author": "森鷗外",
     "author_en": "Mori Ogai",
     "cover_image": "",
-    "gradient": [
-      "#3a6186",
-      "#89253e",
-      "#1a0a14"
-    ],
+    "gradient": ["#3a6186", "#89253e", "#1a0a14"],
     "summary_ja": "島流しの罪人を乗せた高瀬舟。護送する同心・庄兵衛は、弟を殺した罪人の穏やかな表情に疑問を抱く。安楽死と知足の問題を問う短編。",
     "summary_en": "A boat on the Takase River carries a convict sentenced to exile. The escorting officer is puzzled by the convict's serene expression. A story exploring euthanasia and contentment.",
-    "tags": [
-      "classic",
-      "complete",
-      "short-story",
-      "philosophical"
-    ],
-    "chapters": [
-      {
-        "id": "ch1",
-        "title": "高瀬舟",
-        "title_en": "The Boat on the Takase River",
-        "filename": "takasebune.json"
-      }
-    ]
+    "genre": "philosophical",
+    "tags": ["classic", "complete", "short-story", "philosophical", "literary"],
+    "chapters": [{"id": "ch1", "title": "高瀬舟", "title_en": "The Boat on the Takase River", "filename": "takasebune.json"}]
+  },
+  {
+    "id": "haiku_basho",
+    "title": "芭蕉の俳句集",
+    "title_en": "Basho's Haiku Collection",
+    "author": "松尾芭蕉",
+    "author_en": "Matsuo Basho",
+    "cover_image": "",
+    "gradient": ["#2d6a4f", "#40916c", "#1b4332"],
+    "summary_ja": "日本俳句の父、松尾芭蕉の代表的な俳句十首。古池や蛙飛びこむ水の音——自然と人生を十七音で詠む。",
+    "summary_en": "Ten iconic haiku by the father of Japanese haiku poetry. 'The old pond, a frog jumps in, the sound of water' — nature and life captured in seventeen syllables.",
+    "genre": "poetry",
+    "tags": ["classic", "complete", "poetry", "haiku", "nature"],
+    "chapters": [{"id": "ch1", "title": "芭蕉の俳句集", "title_en": "Basho's Haiku Collection", "filename": "haiku_basho.json"}]
+  },
+  {
+    "id": "haiku_issa",
+    "title": "一茶の俳句集",
+    "title_en": "Issa's Haiku Collection",
+    "author": "小林一茶",
+    "author_en": "Kobayashi Issa",
+    "cover_image": "",
+    "gradient": ["#bc6c25", "#dda15e", "#606c38"],
+    "summary_ja": "「やせ蛙まけるな一茶これにあり」——庶民の暮らしと小さな生き物への愛を詠んだ一茶の俳句十首。",
+    "summary_en": "'Skinny frog, don't give up, Issa is here!' — Ten haiku by Issa celebrating everyday life and compassion for small creatures.",
+    "genre": "poetry",
+    "tags": ["classic", "complete", "poetry", "haiku", "nature", "humor"],
+    "chapters": [{"id": "ch1", "title": "一茶の俳句集", "title_en": "Issa's Haiku Collection", "filename": "haiku_issa.json"}]
   }
 ]
