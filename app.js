@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentNovel: null,
         currentChapter: null,
         library: [],
+        news: { articles: [] },  // { lastUpdated, articles: [{ id, title, url, filename }] }
         dictionary: {},
         grammar: [],
         flashcards: loadFromStorage('yomu-flashcards', []),
@@ -30,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ─── DOM References ───
     const views = {
         library: document.getElementById('library-view'),
+        news: document.getElementById('news-view'),
         novel: document.getElementById('novel-view'),
         reader: document.getElementById('reader-view'),
         flashcards: document.getElementById('flashcards-view'),
@@ -47,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTheme(state.theme);
         loadDictionary();
         loadLibrary();
+        loadNews();
         loadGrammar();
         setupEventListeners();
         updateFlashcardStats();
@@ -132,6 +135,80 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show/hide bottom nav (hide in reader and novel detail)
         const hideNav = viewName === 'reader' || viewName === 'novel';
         bottomNav.classList.toggle('nav-hidden', hideNav);
+    }
+
+    // ═══════════════════════════════════════
+    // News (NHK News Web Easy)
+    // ═══════════════════════════════════════
+    function loadNews() {
+        fetch('news.json')
+            .then(res => res.json())
+            .then(data => {
+                state.news = data;
+                if (state.currentView === 'news') renderNewsList(data.articles || []);
+            })
+            .catch(err => {
+                console.error('Error loading news:', err);
+                state.news = { articles: [] };
+                if (state.currentView === 'news') {
+                    document.getElementById('news-list').innerHTML =
+                        '<p style="color:var(--text-secondary);text-align:center;padding:2rem">Failed to load news.</p>';
+                }
+            });
+    }
+
+    function renderNewsList(articles) {
+        const container = document.getElementById('news-list');
+        container.innerHTML = '';
+
+        const lastUpdated = state.news.lastUpdated;
+        const updatedEl = document.getElementById('news-last-updated');
+        if (updatedEl && lastUpdated) {
+            try {
+                const d = new Date(lastUpdated);
+                updatedEl.textContent = `Updated ${d.toLocaleDateString()}`;
+            } catch (_) {
+                updatedEl.textContent = '';
+            }
+        }
+
+        if (!articles || articles.length === 0) {
+            container.innerHTML = '<p style="color:var(--text-secondary);text-align:center;padding:2rem;grid-column:1/-1">No articles yet. Run <code>python fetch_news.py</code> to fetch from NHK News Web Easy.</p>';
+            return;
+        }
+
+        articles.forEach((article, index) => {
+            const card = document.createElement('div');
+            card.className = 'news-card';
+            card.style.animationDelay = `${index * 0.05}s`;
+
+            const progress = state.readingProgress['news_' + article.id];
+            card.innerHTML = `
+                <div class="news-card-inner">
+                    <span class="news-card-badge">NHK Easy</span>
+                    ${progress ? '<span class="progress-badge">Read</span>' : ''}
+                    <div class="news-card-title">${escapeHtml(article.title)}</div>
+                </div>
+            `;
+
+            card.addEventListener('click', () => openNewsArticle(article));
+            container.appendChild(card);
+        });
+    }
+
+    function openNewsArticle(article) {
+        // Treat as a synthetic single-chapter "novel" so reader and progress work the same
+        const novel = {
+            id: 'news_' + article.id,
+            type: 'news',
+            title: article.title,
+            title_en: 'NHK Easy News',
+            author: 'NHK',
+            chapters: [{ id: article.id, title: article.title, filename: article.filename }],
+        };
+        state.currentNovel = novel;
+        state.currentChapter = novel.chapters[0];
+        loadChapter(novel, novel.chapters[0]);
     }
 
     // ═══════════════════════════════════════
@@ -975,6 +1052,7 @@ document.addEventListener('DOMContentLoaded', () => {
             item.addEventListener('click', () => {
                 const view = item.dataset.view;
                 if (view === 'flashcards') renderFlashcardView();
+                if (view === 'news') renderNewsList(state.news.articles || []);
                 navigateTo(view);
             });
         });
@@ -1006,7 +1084,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('reader-back-btn').addEventListener('click', () => {
             saveReadingProgress();
             if (state.currentNovel) {
-                showNovelDetail(state.currentNovel);
+                if (state.currentNovel.type === 'news') {
+                    navigateTo('news');
+                } else {
+                    showNovelDetail(state.currentNovel);
+                }
             } else {
                 navigateTo('library');
             }
@@ -1051,7 +1133,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 saveToStorage('yomu-furigana', state.showFurigana);
                 applyReaderSettings();
                 // Re-render if content exists
-                if (state.currentChapter) {
+                if (state.currentChapter && state.currentNovel) {
                     loadChapter(state.currentNovel, state.currentChapter);
                 }
             });
@@ -1244,6 +1326,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // ═══════════════════════════════════════
     // Utilities
     // ═══════════════════════════════════════
+    function escapeHtml(s) {
+        if (s == null) return '';
+        const div = document.createElement('div');
+        div.textContent = s;
+        return div.innerHTML;
+    }
+
     function loadFromStorage(key, defaultValue) {
         try {
             const data = localStorage.getItem(key);

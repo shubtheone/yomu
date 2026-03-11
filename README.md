@@ -131,3 +131,8 @@ yomu/
 ## License
 
 Stories from Aozora Bunko are in the public domain in Japan.
+
+### News (NHK やさしいことばニュース)
+- A **News** tab shows articles from [NHK News Web Easy](https://www3.nhk.or.jp/news/easy/) (easy Japanese for learners).
+- Run `python fetch_news.py` (requires `pip install requests beautifulsoup4`) to fetch the latest articles and save them as JSON. Run it daily or on demand; the app caches and works offline.
+- News articles use the **same reader** as the library: furigana, tap-to-lookup dictionary, add to flashcards, vertical/horizontal mode, and font size.
