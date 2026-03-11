@@ -1,11 +1,155 @@
 {
-  "lastUpdated": "2026-03-11T05:24:21.905355Z",
+  "lastUpdated": "2026-03-11T06:18:18.113310Z",
   "articles": [
     {
-      "id": "sample_easy_news",
-      "title": "やさしい日本語のニュース",
-      "url": "https://www3.nhk.or.jp/news/easy/",
-      "filename": "news/sample_easy_news.json"
+      "id": "rss_9456",
+      "title": "イランへの攻撃が始まってから10日　戦いが続いている",
+      "url": "https://nhkeasier.com/story/9456/",
+      "filename": "news/rss_9456.json"
+    },
+    {
+      "id": "rss_9457",
+      "title": "たくさんの人に津波の怖さを伝えていきたい",
+      "url": "https://nhkeasier.com/story/9457/",
+      "filename": "news/rss_9457.json"
+    },
+    {
+      "id": "rss_9458",
+      "title": "パスポートを作る時に払うお金が安くなりそう",
+      "url": "https://nhkeasier.com/story/9458/",
+      "filename": "news/rss_9458.json"
+    },
+    {
+      "id": "rss_9459",
+      "title": "パラリンピック　村岡選手が日本の選手で初めてのメダル",
+      "url": "https://nhkeasier.com/story/9459/",
+      "filename": "news/rss_9459.json"
+    },
+    {
+      "id": "rss_9452",
+      "title": "イラン　新しいトップにハメネイ師の息子モジタバ師を選んだ",
+      "url": "https://nhkeasier.com/story/9452/",
+      "filename": "news/rss_9452.json"
+    },
+    {
+      "id": "rss_9453",
+      "title": "東京　石油が急に高くなって株の価格がとても安くなった",
+      "url": "https://nhkeasier.com/story/9453/",
+      "filename": "news/rss_9453.json"
+    },
+    {
+      "id": "rss_9454",
+      "title": "イタリアでパラリンピックの開会式があった",
+      "url": "https://nhkeasier.com/story/9454/",
+      "filename": "news/rss_9454.json"
+    },
+    {
+      "id": "rss_9455",
+      "title": "台湾の祭りに青森の「ねぶた」が参加した",
+      "url": "https://nhkeasier.com/story/9455/",
+      "filename": "news/rss_9455.json"
+    },
+    {
+      "id": "rss_9448",
+      "title": "空港が閉まっていた中東　ドバイからの飛行機が日本に着いた",
+      "url": "https://nhkeasier.com/story/9448/",
+      "filename": "news/rss_9448.json"
+    },
+    {
+      "id": "rss_9449",
+      "title": "公立の学校　先生が3800人足りない",
+      "url": "https://nhkeasier.com/story/9449/",
+      "filename": "news/rss_9449.json"
+    },
+    {
+      "id": "rss_9450",
+      "title": "東日本大震災を伝える「かるた」を作った",
+      "url": "https://nhkeasier.com/story/9450/",
+      "filename": "news/rss_9450.json"
+    },
+    {
+      "id": "rss_9451",
+      "title": "パラリンピック　イタリアで6日から始まる",
+      "url": "https://nhkeasier.com/story/9451/",
+      "filename": "news/rss_9451.json"
+    },
+    {
+      "id": "rss_9444",
+      "title": "国連「アメリカとイスラエルの攻撃はルールに違反している」",
+      "url": "https://nhkeasier.com/story/9444/",
+      "filename": "news/rss_9444.json"
+    },
+    {
+      "id": "rss_9445",
+      "title": "中東の日本人学校　子どもたちが戦争を怖がっている",
+      "url": "https://nhkeasier.com/story/9445/",
+      "filename": "news/rss_9445.json"
+    },
+    {
+      "id": "rss_9446",
+      "title": "東京の会社が作ったロケット　3回目の打ち上げも失敗",
+      "url": "https://nhkeasier.com/story/9446/",
+      "filename": "news/rss_9446.json"
+    },
+    {
+      "id": "rss_9447",
+      "title": "京都の三室戸寺　しだれ梅がきれいに咲いている",
+      "url": "https://nhkeasier.com/story/9447/",
+      "filename": "news/rss_9447.json"
+    },
+    {
+      "id": "rss_9440",
+      "title": "アメリカ・イスラエルとイランの戦いが続いている",
+      "url": "https://nhkeasier.com/story/9440/",
+      "filename": "news/rss_9440.json"
+    },
+    {
+      "id": "rss_9441",
+      "title": "フランスやイギリスなど「地中海に軍の船を出す」",
+      "url": "https://nhkeasier.com/story/9441/",
+      "filename": "news/rss_9441.json"
+    },
+    {
+      "id": "rss_9442",
+      "title": "東京高等裁判所　旧統一教会に解散命令を出した",
+      "url": "https://nhkeasier.com/story/9442/",
+      "filename": "news/rss_9442.json"
+    },
+    {
+      "id": "rss_9443",
+      "title": "月が地球の影に全部隠れる「皆既月食」",
+      "url": "https://nhkeasier.com/story/9443/",
+      "filename": "news/rss_9443.json"
+    },
+    {
+      "id": "rss_9436",
+      "title": "トランプ大統領「もうすぐ大きい波が来る」",
+      "url": "https://nhkeasier.com/story/9436/",
+      "filename": "news/rss_9436.json"
+    },
+    {
+      "id": "rss_9437",
+      "title": "アメリカの人たち　攻撃に「反対」が「賛成」より多い",
+      "url": "https://nhkeasier.com/story/9437/",
+      "filename": "news/rss_9437.json"
+    },
+    {
+      "id": "rss_9438",
+      "title": "戦いが続くと天然ガスの値段が上がる心配がある",
+      "url": "https://nhkeasier.com/story/9438/",
+      "filename": "news/rss_9438.json"
+    },
+    {
+      "id": "rss_9439",
+      "title": "岐阜県高山市　ヨーロッパなどからの旅行客がホテルをキャンセル",
+      "url": "https://nhkeasier.com/story/9439/",
+      "filename": "news/rss_9439.json"
+    },
+    {
+      "id": "rss_9432",
+      "title": "アメリカとイスラエルがイランを攻撃　戦いが止まらない",
+      "url": "https://nhkeasier.com/story/9432/",
+      "filename": "news/rss_9432.json"
     }
   ]
 }
