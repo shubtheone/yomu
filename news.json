@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-11T06:18:18.113310Z",
+  "lastUpdated": "2026-03-18T05:58:58.934278Z",
   "articles": [
     {
       "id": "rss_9456",
@@ -150,6 +150,62 @@
       "title": "アメリカとイスラエルがイランを攻撃　戦いが止まらない",
       "url": "https://nhkeasier.com/story/9432/",
       "filename": "news/rss_9432.json"
+    },
+    {
+      "id": "rss_9476",
+      "title": "沖縄県の海　船がひっくり返って高校生など2人が亡くなった",
+      "url": "https://nhkeasier.com/story/9476/",
+      "filename": "news/rss_9476.json",
+      "date": "2026-03-17"
+    },
+    {
+      "id": "rss_9477",
+      "title": "トランプ大統領にどう答えるか　それぞれの国が考えている",
+      "url": "https://nhkeasier.com/story/9477/",
+      "filename": "news/rss_9477.json",
+      "date": "2026-03-17"
+    },
+    {
+      "id": "rss_9478",
+      "title": "中東にインスタントラーメンが輸出できなくて困っている",
+      "url": "https://nhkeasier.com/story/9478/",
+      "filename": "news/rss_9478.json",
+      "date": "2026-03-17"
+    },
+    {
+      "id": "rss_9479",
+      "title": "栃木県日光市　走るSLの中で保育園の卒業の式があった",
+      "url": "https://nhkeasier.com/story/9479/",
+      "filename": "news/rss_9479.json",
+      "date": "2026-03-17"
+    },
+    {
+      "id": "rss_9472",
+      "title": "政府　ためていた石油を16日から出すことにした",
+      "url": "https://nhkeasier.com/story/9472/",
+      "filename": "news/rss_9472.json",
+      "date": "2026-03-16"
+    },
+    {
+      "id": "rss_9473",
+      "title": "イタリア　ミラノ・コルティナパラリンピックが終わった",
+      "url": "https://nhkeasier.com/story/9473/",
+      "filename": "news/rss_9473.json",
+      "date": "2026-03-16"
+    },
+    {
+      "id": "rss_9474",
+      "title": "山梨県と岐阜県、高知県で桜が咲いた",
+      "url": "https://nhkeasier.com/story/9474/",
+      "filename": "news/rss_9474.json",
+      "date": "2026-03-16"
+    },
+    {
+      "id": "rss_9475",
+      "title": "佐賀県　おかゆのカビの色や大きさで1年を占った",
+      "url": "https://nhkeasier.com/story/9475/",
+      "filename": "news/rss_9475.json",
+      "date": "2026-03-16"
     }
   ]
 }
