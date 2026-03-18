@@ -6,14 +6,18 @@ Fetch latest news from NHK News Web Easy and save as JSON in Yomu's token format
 2. If NHK returns 401/403, falls back to NHK Easier RSS (https://nhkeasier.com/feed/)
    which includes full article HTML with ruby in each item — no auth needed.
 
+Articles older than 5 days are removed. Use --daily to run once every 24 hours.
+
 Requires: pip install requests beautifulsoup4
 """
+import argparse
 import html
 import json
 import os
 import re
 import sys
 import time
+from datetime import datetime, timedelta, timezone
 
 try:
     import requests
@@ -26,6 +30,7 @@ BASE_URL = "https://www3.nhk.or.jp/news/easy"
 RSS_URL = "https://nhkeasier.com/feed/"
 OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__))
 NEWS_DIR = os.path.join(OUTPUT_DIR, "news")
+RETENTION_DAYS = 5
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,application/json,*/*;q=0.8",
@@ -40,6 +45,55 @@ def _safe_print(s):
     except UnicodeEncodeError:
         # Fallback: ASCII-safe version (replace non-ASCII)
         print(s.encode("ascii", errors="replace").decode("ascii"))
+
+
+def _parse_date(s, default=None):
+    """Parse date string to date object. Returns default if unparseable."""
+    if not s:
+        return default
+    # NHK: often ISO-like "2024-03-08T12:00:00+09:00" or "2024-03-08"
+    for fmt in ("%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d"):
+        try:
+            dt = datetime.strptime(re.sub(r"Z$", "+00:00", s.strip()[:25]), fmt)
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            return dt.date()
+        except (ValueError, TypeError):
+            continue
+    # RSS: RFC 2822 e.g. "Wed, 13 Mar 2024 12:00:00 +0900"
+    try:
+        from email.utils import parsedate_to_datetime
+        dt = parsedate_to_datetime(s.strip())
+        return dt.date()
+    except (ValueError, TypeError, ImportError):
+        pass
+    return default
+
+
+def _cutoff_date():
+    """Return the date below which articles are considered too old (exclusive)."""
+    return (datetime.now(timezone.utc).date() - timedelta(days=RETENTION_DAYS))
+
+
+def _remove_old_news(keep_filenames, retention_days=RETENTION_DAYS):
+    """Delete news/*.json files that are not in keep_filenames. Never deletes sample_easy_news."""
+    keep = set(keep_filenames)
+    removed = 0
+    for name in os.listdir(NEWS_DIR):
+        if not name.endswith(".json"):
+            continue
+        filename = f"news/{name}"
+        if filename == "news/sample_easy_news.json":
+            continue
+        if filename not in keep:
+            path = os.path.join(NEWS_DIR, name)
+            try:
+                os.remove(path)
+                removed += 1
+                _safe_print(f"Removed old: {filename}")
+            except OSError as e:
+                print(f"Could not remove {path}: {e}", file=sys.stderr)
+    return removed
 
 
 def html_to_tokens(soup_fragment):
@@ -74,7 +128,7 @@ def _element_to_tokens(elem):
                 tokens.append({"s": base, "r": reading})
         elif child.name == "rt":
             continue
-        elif child.name is None and child.string and not child.find_parent("rt"):
+        elif child.name is None and child.string and not child.find_parent("rt") and not child.find_parent("ruby"):
             for part in re.split(r"(\s+)", child.string):
                 if part:
                     tokens.append({"s": part, "r": ""})
@@ -138,6 +192,12 @@ def fetch_from_rss(max_items=25):
             if m:
                 link = m.group(1).strip()
 
+        # Optional pubDate for retention
+        pub_date = None
+        m = re.search(r"<pubDate[^>]*>(.*?)</pubDate>", block, re.DOTALL)
+        if m:
+            pub_date = _parse_date(html.unescape(m.group(1).strip()))
+
         # Get description content (may be CDATA or entity-encoded)
         desc_html = ""
         m = re.search(r"<description[^>]*>(.*?)</description>", block, re.DOTALL)
@@ -164,7 +224,14 @@ def fetch_from_rss(max_items=25):
         if not slug_base:
             slug_base = re.sub(r"[^\w\-]", "_", (title or "news")[:30])
         aid = "rss_" + re.sub(r"[^\w\-]", "_", slug_base)[:60]
-        results.append({"id": aid, "title": title or "ニュース", "content": content, "url": link or RSS_URL})
+        article_date = pub_date or datetime.now(timezone.utc).date()
+        results.append({
+            "id": aid,
+            "title": title or "ニュース",
+            "content": content,
+            "url": link or RSS_URL,
+            "date": article_date.isoformat(),
+        })
     return results
 
 
@@ -196,8 +263,25 @@ def fetch_article_by_id(news_id):
         return None
 
 
-def main():
+def run_fetch():
     os.makedirs(NEWS_DIR, exist_ok=True)
+    cutoff = _cutoff_date()
+    today = datetime.now(timezone.utc).date()
+
+    # Load existing index and keep articles that are still within retention (by date)
+    kept_by_id = {}
+    index_path = os.path.join(OUTPUT_DIR, "news.json")
+    if os.path.isfile(index_path):
+        try:
+            with open(index_path, "r", encoding="utf-8") as f:
+                existing = json.load(f)
+            for a in existing.get("articles") or []:
+                adate = _parse_date(a.get("date"), default=today)
+                if adate > cutoff:
+                    kept_by_id[a["id"]] = a
+        except (json.JSONDecodeError, OSError):
+            pass
+
     top_list = fetch_top_list()
     articles = []
 
@@ -207,6 +291,11 @@ def main():
             news_id = item.get("news_id") or item.get("id") or item.get("newsId")
             title_from_list = (item.get("title") or item.get("title_with_ruby") or "").strip()
             if not news_id:
+                continue
+            # Use article date from list for retention; skip if older than cutoff
+            raw_date = item.get("news_prearranged_time") or item.get("news_publication_time") or item.get("date")
+            article_date = _parse_date(raw_date, default=today)
+            if article_date <= cutoff:
                 continue
             result = fetch_article_by_id(news_id)
             if not result:
@@ -221,22 +310,42 @@ def main():
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(obj, f, ensure_ascii=False, indent=None)
             article_url = f"{BASE_URL}/{news_id}/{news_id}.html"
-            articles.append({"id": aid, "title": obj["title"], "url": article_url, "filename": filename})
-        _safe_print(f"Saved: {(obj['title'])[:50]}... -> {filename}")
-        time.sleep(0.3)
+            articles.append({
+                "id": aid,
+                "title": obj["title"],
+                "url": article_url,
+                "filename": filename,
+                "date": article_date.isoformat(),
+            })
+            _safe_print(f"Saved: {(obj['title'])[:50]}... -> {filename}")
+            time.sleep(0.3)
     else:
         # Fallback: NHK Easier RSS (full content in feed, no auth)
         print("Using NHK Easier RSS (nhkeasier.com/feed/)...")
         rss_items = fetch_from_rss()
         for item in rss_items:
+            article_date = _parse_date(item.get("date"), default=today)
+            if article_date <= cutoff:
+                continue
             aid = item["id"]
             filename = f"news/{aid}.json"
             path = os.path.join(OUTPUT_DIR, filename)
             obj = {"title": item["title"], "content": item["content"]}
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(obj, f, ensure_ascii=False, indent=None)
-            articles.append({"id": aid, "title": obj["title"], "url": item["url"], "filename": filename})
+            articles.append({
+                "id": aid,
+                "title": obj["title"],
+                "url": item["url"],
+                "filename": filename,
+                "date": article_date.isoformat(),
+            })
             _safe_print(f"Saved: {(obj['title'])[:50]}... -> {filename}")
+
+    # Merge with existing index: keep older articles still within retention, add/overwrite with this run
+    for a in articles:
+        kept_by_id[a["id"]] = a
+    articles = list(kept_by_id.values())
 
     if not articles:
         # Sample article so the news view is never empty
@@ -257,15 +366,39 @@ def main():
             "title": sample["title"],
             "url": BASE_URL,
             "filename": f"news/{sample_id}.json",
+            "date": today.isoformat(),
         })
         print("Added sample article (no articles could be fetched). Run from a network that can access NHK for live news.")
 
-    index = {"lastUpdated": __import__("datetime").datetime.utcnow().isoformat() + "Z", "articles": articles}
+    # Remove article files that are no longer in the index (older than retention)
+    keep_filenames = [a["filename"] for a in articles]
+    removed = _remove_old_news(keep_filenames)
+    if removed:
+        _safe_print(f"Removed {removed} old article file(s).")
+
+    index = {"lastUpdated": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"), "articles": articles}
     index_path = os.path.join(OUTPUT_DIR, "news.json")
     with open(index_path, "w", encoding="utf-8") as f:
         json.dump(index, f, ensure_ascii=False, indent=2)
     print(f"Wrote {index_path} with {len(articles)} articles.")
 
 
+def main():
+    run_fetch()
+
+
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Fetch NHK Easy news for Yomu. Removes articles older than 5 days.")
+    parser.add_argument(
+        "--daily",
+        action="store_true",
+        help="Run forever: fetch once, then every 24 hours (for cron-less auto-update)",
+    )
+    args = parser.parse_args()
+    if args.daily:
+        while True:
+            run_fetch()
+            _safe_print("Next fetch in 24 hours...")
+            time.sleep(24 * 3600)
+    else:
+        main()
